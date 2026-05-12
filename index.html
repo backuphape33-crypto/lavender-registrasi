@@ -15,9 +15,12 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; margin: 0; }
         
-        /* Sidebar Active State */
+        /* FIX HOVER MENU */
+        .nav-item { transition: all 0.3s ease; }
         .nav-item.active { background-color: var(--lavender); color: white; }
         .nav-item.active svg { stroke: white; }
+        .nav-item:not(.active):hover { background-color: var(--lavender-light); color: var(--lavender); }
+        .nav-item:not(.active):hover svg { stroke: var(--lavender); }
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -43,9 +46,14 @@
                 position: absolute; 
                 left: 0; top: 0; 
                 width: 100%; 
-                padding: 15mm;
+                padding: 10mm; /* Dikurangi agar lebih muat */
                 background: white;
                 color: #000;
+                /* SCALE AGAR MUAT 1 HALAMAN A4 */
+                transform: scale(0.92);
+                transform-origin: top left;
+                height: 99vh;
+                overflow: hidden;
             }
 
             .print-brand { display: flex; align-items: center; gap: 15px; }
@@ -57,8 +65,8 @@
             .print-title h2 { margin: 0; font-size: 16px; color: var(--lavender); font-weight: bold; }
             .print-title p { margin: 5px 0 0 0; font-size: 9px; }
 
-            .p-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 0; }
-            .p-table td { border: 1px solid #000; padding: 4px 6px; vertical-align: top; }
+            .p-table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 0; }
+            .p-table td { border: 1px solid #000; padding: 3px 5px; vertical-align: top; }
             
             .p-lbl { font-size: 8px; font-weight: bold; color: #000; margin-bottom: 2px; }
             .p-lbl-en { font-style: italic; font-weight: normal; color: #444; }
@@ -108,15 +116,15 @@
             </button>
         </div>
         <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 Dashboard
             </button>
-            <button onclick="switchTab('registrasi')" id="nav-registrasi" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
+            <button onclick="switchTab('registrasi')" id="nav-registrasi" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 Menu Registrasi
             </button>
-            <button onclick="switchTab('riwayat')" id="nav-riwayat" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
+            <button onclick="switchTab('riwayat')" id="nav-riwayat" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 Riwayat Registrasi
             </button>
@@ -140,7 +148,7 @@
                     <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4">
                         <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
-                    <div><p class="text-sm text-gray-500 font-medium">Total Seluruh Data (Di HP ini)</p><p id="dash-total" class="text-2xl font-bold text-gray-800">0</p></div>
+                    <div><p class="text-sm text-gray-500 font-medium">Total Seluruh Data (Database)</p><p id="dash-total" class="text-2xl font-bold text-gray-800">0</p></div>
                 </div>
             </div>
         </section>
@@ -220,7 +228,12 @@
         <!-- SECTION: RIWAYAT -->
         <section id="sec-riwayat" class="p-4 md:p-8 hidden">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
-                <h2 class="text-xl md:text-2xl font-bold text-gray-800">Riwayat Registrasi</h2>
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 flex items-center">
+                    Riwayat Registrasi
+                    <button onclick="fetchHistory()" title="Refresh Data Cloud" class="ml-4 text-[#5F4180] hover:bg-purple-100 p-2 rounded-full transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </h2>
                 <div class="flex gap-3">
                     <button onclick="hapusTerpilih()" class="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-4 py-2 rounded-lg font-medium text-sm transition-colors flex items-center">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
@@ -268,7 +281,7 @@
                 </div>
                 <!-- Empty State -->
                 <div id="history-empty" class="hidden p-8 text-center text-gray-500">
-                    <p>Belum ada data registrasi di memori HP/Laptop ini.</p>
+                    <p>Sedang memuat data dari Database Cloud...</p>
                 </div>
             </div>
         </section>
@@ -293,7 +306,7 @@
                 <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Hapus Data?</h3>
-            <p class="text-gray-500 text-sm mb-6">Apakah Anda yakin ingin menghapus data ini? Data yang dihapus tidak dapat dikembalikan.</p>
+            <p class="text-gray-500 text-sm mb-6">Apakah Anda yakin ingin menghapus data ini? (Perhatian: Data ini hanya dihapus dari tampilan saat ini, hapus permanen tetap melalui Excel).</p>
             <div class="flex gap-3">
                 <button onclick="closeDeleteModal()" class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-200 transition-colors">Batal</button>
                 <button id="btn-confirm-delete" class="flex-1 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition-colors">Hapus</button>
@@ -445,19 +458,19 @@
                 <td class="p-sig" width="25%" style="border: 1px solid #000; border-left:none;">
                     <div class="p-sig-head">Melapor keluar oleh<br><span class="p-lbl-en">Checked-out By</span></div><br><br><br>
                 </td>
+                <!-- Timestamp Bawah dihilangkan sesuai permintaan -->
                 <td width="50%" style="border:none; text-align:right; vertical-align:bottom; font-size:10px; font-weight:bold; color: #000;"></td>
             </tr>
         </table>
     </div>
 
     <script>
-        // INISIALISASI DATA (LOCALSTORAGE)
-        let dbRiwayat = JSON.parse(localStorage.getItem('lavender_history')) || [];
-        let tempDeleteId = null;
-        
         // PASTE URL API GOOGLE APPS SCRIPT ANDA DI SINI
         const API_URL = "https://script.google.com/macros/s/AKfycbwMpunNJ39O7pTFwBvpy_A2R05jUhlvWX1Y-8KYEl2eNSW_Jrj3MWp3V0wWIm1HJjxCZg/exec"; 
 
+        // DATA CLOUD (Bukan lagi localStorage)
+        let dbRiwayat = []; 
+        let tempDeleteId = null;
         let roomMasterData = [];
         let selectedTipe = "";
         let selectedHarga = "";
@@ -473,7 +486,6 @@
         window.onload = async () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('i_ci').value = today;
-            updateDashboard();
 
             // AMBIL DATA KAMAR DARI GOOGLE SHEETS
             const loadMsg = document.getElementById('loadMsg');
@@ -490,8 +502,11 @@
                     roomMasterData.forEach(r => {
                         selectKamar.innerHTML += `<option value="${r[0]}">${r[0]}</option>`;
                     });
+
+                    // SETELAH KAMAR, AMBIL RIWAYAT CLOUD
+                    fetchHistory();
                 } catch(e) {
-                    console.error("Gagal load kamar:", e);
+                    console.error("Gagal load data API:", e);
                     selectKamar.innerHTML = '<option value="">Gagal memuat database</option>';
                 } finally {
                     if(loadMsg) loadMsg.classList.add('hidden');
@@ -500,6 +515,27 @@
                 selectKamar.innerHTML = '<option value="">ISI LINK API GOOGLE SCRIPT DULU!</option>';
             }
         };
+
+        // FUNGSI TARIK DATA RIWAYAT DARI CLOUD GOOGLE SHEETS
+        async function fetchHistory() {
+            const emptyState = document.getElementById('history-empty');
+            if(emptyState) {
+                emptyState.innerHTML = '<p>Sedang mensinkronisasi data dari Cloud...</p>';
+                emptyState.classList.remove('hidden');
+            }
+            try {
+                const res = await fetch(`${API_URL}?action=getHistory`, { redirect: "follow" });
+                const data = await res.json();
+                if(data && Array.isArray(data)) {
+                    dbRiwayat = data;
+                    renderHistory();
+                    updateDashboard();
+                }
+            } catch (e) {
+                console.error("Gagal menarik history:", e);
+                if(emptyState) emptyState.innerHTML = '<p class="text-red-500">Gagal menarik data riwayat dari database.</p>';
+            }
+        }
 
         function updateRoomDetails() {
             const val = document.getElementById("i_noKamar").value;
@@ -538,7 +574,7 @@
 
             const btn = document.getElementById('btn-submit-reg');
             const originalText = btn.innerText;
-            btn.innerText = "Menyimpan ke Database...";
+            btn.innerText = "Menyimpan ke Database Cloud...";
             btn.disabled = true;
 
             const now = new Date();
@@ -578,8 +614,8 @@
                     });
                 }
 
+                // Tambahkan langsung ke UI sementara menunggu Refresh API
                 dbRiwayat.unshift(payload);
-                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
 
                 document.getElementById('regForm').reset();
                 document.getElementById('i_ci').value = new Date().toISOString().split('T')[0];
@@ -602,7 +638,7 @@
 
         function updateDashboard() {
             const todayStr = new Date().toISOString().split('T')[0];
-            const todayCount = dbRiwayat.filter(d => d.ts.startsWith(todayStr)).length;
+            const todayCount = dbRiwayat.filter(d => d.ts && d.ts.startsWith(todayStr)).length;
             document.getElementById('dash-today').innerText = todayCount;
             document.getElementById('dash-total').innerText = dbRiwayat.length;
         }
@@ -617,12 +653,13 @@
             document.getElementById('cb-all').checked = false;
 
             let filteredData = dbRiwayat;
-            if(filterDate) filteredData = filteredData.filter(d => d.ts.startsWith(filterDate));
+            if(filterDate) filteredData = filteredData.filter(d => d.ts && d.ts.startsWith(filterDate));
 
             let dataToShow = filteredData;
             if(filterLimit !== 'all') dataToShow = filteredData.slice(0, parseInt(filterLimit));
 
             if(dataToShow.length === 0) {
+                emptyState.innerHTML = '<p>Belum ada data registrasi yang sesuai.</p>';
                 emptyState.classList.remove('hidden');
             } else {
                 emptyState.classList.add('hidden');
@@ -663,7 +700,7 @@
             document.getElementById('p_perusahaan').innerText = data.perusahaan;
             document.getElementById('p_ktp').innerText = data.ktp;
             document.getElementById('p_alamat').innerText = data.alamat;
-            document.getElementById('p_email').innerText = data.email;
+            document.getElementById('p_email').innerText = data.email || "";
             document.getElementById('p_hp').innerText = data.hp;
             document.getElementById('p_tglLahir').innerText = formatTgl(data.tglLahir);
             document.getElementById('p_ci').innerText = formatTgl(data.ci);
@@ -688,7 +725,10 @@
                     dbRiwayat = dbRiwayat.filter(d => d.id !== tempDeleteId);
                 }
                 
-                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
+                // CATATAN: Fungsi hapus ini hanya menghapus dari layar web sementara.
+                // Jika web direfresh, ia akan memuat ulang dari Google Sheets (karena Sheets tidak mendukung hapus via API kita saat ini).
+                // Untuk menghapus permanen, admin harus menghapusnya langsung dari Excel Google Sheets.
+                
                 closeDeleteModal();
                 renderHistory();
                 updateDashboard();
