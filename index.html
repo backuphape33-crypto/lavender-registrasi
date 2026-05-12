@@ -79,7 +79,7 @@
             .p-rules strong { color: var(--lavender); }
             
             .p-sig-head { font-size: 9px; padding: 4px; text-align: left; font-weight: bold; }
-            .icon-prohibit { width: 22px; height: auto; display: inline-block; }
+            .icon-prohibit { width: 28px; height: auto; display: block; margin: 0 auto; }
         }
     </style>
 </head>
@@ -446,12 +446,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border: none; border-top: 1px solid #000; padding: 6px 0; text-align: center; vertical-align: middle; background-color: #fafafa;">
-                                <!-- Ikon open-source (Icons8) -->
-                                <img src="https://img.icons8.com/color/48/no-dogs.png" class="icon-prohibit" alt="No Pets">
-                                <img src="https://img.icons8.com/color/48/no-alcohol.png" class="icon-prohibit" alt="No Alcohol">
-                                <img src="https://img.icons8.com/color/48/no-smoking.png" class="icon-prohibit" alt="No Smoking">
-                                <img src="https://img.icons8.com/color/48/no-audio--v1.png" class="icon-prohibit" alt="No Noise">
+                            <td style="border: none; border-top: 1px solid #000; padding: 8px; text-align: center; vertical-align: middle; background-color: #fafafa;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; justify-items: center; align-items: center;">
+                                    <img src="./no-pet.png" class="icon-prohibit" alt="No Pets" onerror="this.style.display='none'">
+                                    <img src="./no-drinks.png" class="icon-prohibit" alt="No Alcohol" onerror="this.style.display='none'">
+                                    <img src="./durian.png" class="icon-prohibit" alt="No Durian" onerror="this.style.display='none'">
+                                    <img src="./bed.png" class="icon-prohibit" alt="No Bed" onerror="this.style.display='none'">
+                                </div>
                             </td>
                         </tr>
                     </table>
