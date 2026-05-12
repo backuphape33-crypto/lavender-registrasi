@@ -141,11 +141,9 @@
                         <div class="flex flex-col">
                             <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor Kamar <span class="text-red-500">*</span></label>
                             <select id="i_noKamar" onchange="updateRoomDetails()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] focus:border-[#5F4180] outline-none transition-all" required>
-                                <option value="">-- Pilih Kamar --</option>
-                                <option value="101" data-tipe="VIP 2" data-harga="275000">101 - VIP 2</option>
-                                <option value="102" data-tipe="VIP 2" data-harga="275000">102 - VIP 2</option>
-                                <option value="201" data-tipe="Standar" data-harga="200000">201 - Standar</option>
+                                <option value="">-- Memuat Kamar dari Database... --</option>
                             </select>
+                            <span id="loadMsg" class="text-xs text-[#5F4180] mt-1 hidden font-semibold">Sedang sinkronisasi data dari Google Sheets...</span>
                         </div>
 
                         <div class="flex flex-col">
@@ -431,14 +429,57 @@
         let tempDeleteId = null;
         
         // PASTE URL API GOOGLE APPS SCRIPT ANDA DI SINI
-        const API_URL = "https://script.google.com/macros/s/AKfycbxx71bLWTkiHHpNGorU5Hyz1NVbWbFoq1CanzFQYgUKxlLOnkVUUqKGy6sBSFlrSVXl/exec"; 
+        const API_URL = "URL_API_GAS_ANDA_DISINI"; 
 
-        // Set default date hari ini pada form registrasi
-        window.onload = () => {
+        let roomMasterData = [];
+        let selectedTipe = "";
+        let selectedHarga = "";
+
+        // Set default date hari ini pada form registrasi dan fetch data kamar
+        window.onload = async () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('i_ci').value = today;
             updateDashboard();
+
+            // AMBIL DATA KAMAR DARI GOOGLE SHEETS
+            const loadMsg = document.getElementById('loadMsg');
+            const selectKamar = document.getElementById("i_noKamar");
+            
+            if(API_URL !== "https://script.google.com/macros/s/AKfycbxx71bLWTkiHHpNGorU5Hyz1NVbWbFoq1CanzFQYgUKxlLOnkVUUqKGy6sBSFlrSVXl/exec" && API_URL !== "") {
+                try {
+                    if(loadMsg) loadMsg.classList.remove('hidden');
+                    
+                    const res = await fetch(`${API_URL}?action=getRooms`);
+                    roomMasterData = await res.json();
+                    
+                    selectKamar.innerHTML = '<option value="">-- Pilih Kamar --</option>';
+                    roomMasterData.forEach(r => {
+                        selectKamar.innerHTML += `<option value="${r[0]}">${r[0]}</option>`;
+                    });
+                } catch(e) {
+                    console.error("Gagal load kamar:", e);
+                    selectKamar.innerHTML = '<option value="">Gagal memuat database</option>';
+                    alert("Gagal mengambil data kamar dari Google Sheets. Pastikan Link API benar dan bisa diakses.");
+                } finally {
+                    if(loadMsg) loadMsg.classList.add('hidden');
+                }
+            } else {
+                selectKamar.innerHTML = '<option value="">ISI LINK API GOOGLE SCRIPT DULU!</option>';
+            }
         };
+
+        // AUTOFILL HARGA & TIPE KAMAR DARI DATA GOOGLE SHEETS
+        function updateRoomDetails() {
+            const val = document.getElementById("i_noKamar").value;
+            const r = roomMasterData.find(x => x[0] == val);
+            if(r) {
+                selectedTipe = r[1];
+                selectedHarga = Number(r[2]).toLocaleString('id-ID');
+            } else {
+                selectedTipe = "";
+                selectedHarga = "";
+            }
+        }
 
         // NAVIGASI TAB
         function switchTab(tabId) {
