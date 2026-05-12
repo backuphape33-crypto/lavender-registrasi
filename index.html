@@ -2,173 +2,459 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrasi Hotel Lavender</title>
   <style>
-    /* CSS SCREEN: UI RESEPSIONIS */
+    /* =========================================
+       1. TAMPILAN LAYAR (UI RESEPSIONIS)
+       ========================================= */
     @media screen {
-      body { font-family: 'Segoe UI', sans-serif; background: #e9ecef; padding: 20px; }
+      body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: #e9ecef; 
+        padding: 20px; 
+        color: #333; 
+      }
       .print-area { display: none; }
-      .input-container { max-width: 800px; background: white; margin: auto; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-      label { font-weight: 600; font-size: 13px; margin-bottom: 5px; color: #555; }
-      input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
-      .btn-print { grid-column: span 2; padding: 15px; background: #4a148c; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-      .loading { color: #d32f2f; font-size: 12px; margin-top: 5px; display: none; }
+      
+      .input-container { 
+        max-width: 800px; 
+        background: white; 
+        margin: auto; 
+        padding: 30px; 
+        border-radius: 10px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+      }
+      .input-container h2 { 
+        text-align: center; 
+        color: #5F4180; 
+        border-bottom: 3px solid #5F4180; 
+        padding-bottom: 10px; 
+        margin-bottom: 25px;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .form-group { display: flex; flex-direction: column; }
+      .form-group.full-width { grid-column: span 2; }
+      
+      label { font-weight: 600; margin-bottom: 5px; font-size: 13px; color: #555; }
+      input, select, textarea { 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        font-size: 14px; 
+        outline: none;
+      }
+      input:focus, select:focus, textarea:focus { border-color: #5F4180; }
+      
+      .btn-print { 
+        grid-column: span 2;
+        padding: 15px; 
+        background: #5F4180; 
+        color: white; 
+        border: none; 
+        border-radius: 5px; 
+        font-size: 16px; 
+        font-weight: bold;
+        cursor: pointer; 
+        margin-top: 15px;
+        transition: background 0.3s;
+      }
+      .btn-print:hover { background: #4a3266; }
+      
+      .loading-msg {
+        color: #d32f2f;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
     }
 
-    /* CSS PRINT: TEMPLATE PERSIS FOTO */
+    /* =========================================
+       2. TAMPILAN CETAK (WARNA LAVENDER GELAP)
+       ========================================= */
     @media print {
       @page { size: A4 portrait; margin: 10mm; }
-      body { margin: 0; padding: 0; font-family: Arial, sans-serif; font-size: 10px; }
-      .input-container { display: none; }
-      .print-area { display: block; width: 100%; }
-      table { width: 100%; border-collapse: collapse; margin-bottom: -1px; }
-      td { border: 1px solid #000; padding: 3px 5px; vertical-align: top; }
-      .val { font-size: 11px; font-weight: bold; text-transform: uppercase; min-height: 14px; }
-      .lbl { font-size: 8px; margin-bottom: 2px; }
-      .highlight-bar { background: #f5f5f5; text-align: center; font-weight: bold; padding: 4px; border: 1px solid #000; border-top: none; }
-      .rules-text { font-size: 8.5px; line-height: 1.3; text-align: justify; }
+      body { margin: 0; padding: 0; font-family: Arial, sans-serif; font-size: 10px; color: #000; }
+      .input-container { display: none; } 
+      .print-area { display: block; width: 100%; max-width: 800px; margin: auto; }
+      
+      .header-table { width: 100%; margin-bottom: 15px; border: none; }
+      .header-table td { border: none; padding: 0; vertical-align: bottom; }
+      
+      /* Brand Hotel */
+      .brand { display: flex; align-items: center; gap: 10px; }
+      .brand img { width: 45px; height: auto; }
+      .brand h1 { margin: 0; font-size: 24px; font-weight: bold; color: #5F4180; font-style: normal; text-transform: uppercase;}
+      .brand p { margin: 0; font-size: 9px; letter-spacing: 1px; color: #555; }
+      
+      .doc-title { text-align: right; }
+      .doc-title h2 { margin: 0; font-size: 16px; font-weight: bold; color: #5F4180; }
+      .doc-title p { margin: 5px 0 0 0; font-size: 9px; }
+
+      /* Tabel dengan border Lavender Gelap */
+      table.t-main { width: 100%; border-collapse: collapse; margin-bottom: -1px; }
+      table.t-main th, table.t-main td { border: 1px solid #5F4180; padding: 4px 6px; vertical-align: top; }
+      
+      .lbl { font-size: 8px; line-height: 1.1; margin-bottom: 2px; color: #5F4180; font-weight: bold;}
+      .lbl-en { font-style: italic; color: #666; font-weight: normal; }
+      .val { font-size: 11px; font-weight: bold; min-height: 14px; text-transform: uppercase; }
+      
+      .text-center { text-align: center; }
+      .mt-10 { margin-top: 15px; }
+
+      .highlight-bar { background-color: #f3e5f5; color: #5F4180; text-align: center; font-weight: bold; font-size: 11px; padding: 5px; border: 1px solid #5F4180; border-top: none; }
+      .sub-bar { text-align: center; font-size: 9px; border: 1px solid #5F4180; border-top: none; padding: 2px; margin-bottom: -1px; color: #5F4180; }
+
+      .rules-text { font-size: 8px; line-height: 1.4; padding-right: 15px !important; }
+      .rules-text p { margin: 0 0 5px 0; text-align: justify; }
+      .rules-text strong { color: #5F4180; }
+      .rules-list { margin: 3px 0 0 15px; padding: 0; }
+      .rules-list li { margin-bottom: 3px; }
+      
+      .signature-box { text-align: center; vertical-align: top; padding: 0 !important; }
+      .sig-header { font-size: 9px; border-bottom: 1px solid #5F4180; padding: 4px; text-align: left; color: #5F4180; font-weight: bold;}
+      
+      .cb-wrapper { display: flex; gap: 15px; font-size: 8px; align-items: center; margin-top: 2px; }
+      .cb-box { width: 8px; height: 8px; border: 1px solid #5F4180; display: inline-block; vertical-align: middle; margin-right: 3px; }
+      
+      .divider { margin: 2px -5px; border-bottom: 1px solid #5F4180; }
     }
   </style>
 </head>
 <body>
 
   <div class="input-container">
-    <h2 style="text-align:center; color:#4a148c; border-bottom:3px solid #4a148c; padding-bottom:10px;">Hotel Lavender - Front Desk</h2>
+    <h2>Registrasi Tamu - Hotel Lavender</h2>
     <form id="regForm" class="form-grid">
-      <div class="form-group" style="display:flex; flex-direction:column;">
+      
+      <div class="form-group">
         <label>Nomor Kamar</label>
-        <select id="i_noKamar" onchange="updateRoomDetails()" required><option value="">Memuat data...</option></select>
-        <span id="loadMsg" class="loading">Sedang mengambil data...</span>
+        <select id="i_noKamar" onchange="updateRoomDetails()" required>
+          <option value="">Memuat data kamar...</option>
+        </select>
+        <div id="loadingStatus" class="loading-msg">Mengambil data dari Spreadsheet...</div>
       </div>
-      <div class="form-group" style="display:flex; flex-direction:column;">
+
+      <div class="form-group">
         <label>Resepsionis</label>
-        <input type="text" id="i_resepsionis" value="YUSUF">
+        <input type="text" id="i_resepsionis" placeholder="Nama Resepsionis">
       </div>
-      <div class="form-group" style="grid-column: span 2; display:flex; flex-direction:column;">
-        <label>Nama Tamu</label>
+
+      <div class="form-group full-width">
+        <label>Nama Tamu (Sesuai KTP)</label>
         <input type="text" id="i_nama" placeholder="Nama Lengkap" required>
       </div>
-      <div class="form-group" style="display:flex; flex-direction:column;"><label>No. KTP</label><input type="text" id="i_ktp" required></div>
-      <div class="form-group" style="display:flex; flex-direction:column;"><label>No. HP / WA</label><input type="text" id="i_hp" required></div>
-      <div class="form-group" style="display:flex; flex-direction:column;"><label>CI (Check-In)</label><input type="date" id="i_ci" required></div>
-      <div class="form-group" style="display:flex; flex-direction:column;"><label>CO (Check-Out)</label><input type="date" id="i_co" required></div>
-      <button type="button" class="btn-print" id="btnAction" onclick="proses()">Simpan ke Sheets & Cetak Form</button>
+
+      <div class="form-group">
+        <label>No. KTP / Paspor</label>
+        <input type="text" id="i_ktp" required>
+      </div>
+
+      <div class="form-group">
+        <label>Tanggal Lahir</label>
+        <input type="date" id="i_tglLahir">
+      </div>
+
+      <div class="form-group">
+        <label>Nomor Handphone / WA</label>
+        <input type="text" id="i_hp" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email (Opsional)</label>
+        <input type="email" id="i_email">
+      </div>
+
+      <div class="form-group full-width">
+        <label>Alamat Lengkap</label>
+        <textarea id="i_alamat" rows="2"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Asal Reservasi (Perusahaan/OTA)</label>
+        <input type="text" id="i_perusahaan" placeholder="Contoh: Traveloka, GoShow">
+      </div>
+
+      <div class="form-group">
+        <label>Jumlah Tamu</label>
+        <input type="number" id="i_jumlahTamu" value="2">
+      </div>
+
+      <div class="form-group">
+        <label>CI (Check-In)</label>
+        <input type="date" id="i_ci" required>
+      </div>
+
+      <div class="form-group">
+        <label>CO (Check-Out)</label>
+        <input type="date" id="i_co" required>
+      </div>
+
+      <button type="button" class="btn-print" onclick="prosesCetak()">Proses & Cetak Formulir</button>
     </form>
   </div>
 
+
   <div class="print-area">
-    <table style="border:none; margin-bottom:10px;">
+    
+    <table class="header-table">
       <tr>
-        <td style="border:none;"><h1 style="margin:0; color:#b71c1c; font-style:italic;">Hotel LAVENDER</h1></td>
-        <td style="border:none; text-align:right;"><h2>Registration Form</h2><p id="p_ts_top"></p></td>
+        <td>
+          <div class="brand">
+            <img src="logo-hotel.png" alt="Logo">
+            <div>
+              <h1>Hotel LAVENDER</h1>
+              <p>SUNGAI CUKA - TANAH BUMBU</p>
+            </div>
+          </div>
+        </td>
+        <td class="doc-title">
+          <h2>Formulir Pendaftaran /<br>Registration Form</h2>
+          <p id="p_timestampKananAtas"></p>
+        </td>
       </tr>
     </table>
 
-    <table>
+    <table class="t-main">
       <tr>
-        <td width="25%"><div class="lbl">No. Kamar</div><div class="val" id="p_noKamar"></div></td>
-        <td width="25%"><div class="lbl">Tamu</div><div class="val">2</div></td>
-        <td width="25%"><div class="lbl">Harga</div><div class="val" id="p_harga"></div></td>
-        <td width="25%"><div class="lbl">Resepsionis</div><div class="val" id="p_resepsionis"></div></td>
+        <td width="25%"><div class="lbl">No. Kamar <span class="lbl-en">Room No.</span></div><div class="val" id="p_noKamar"></div></td>
+        <td width="25%"><div class="lbl">Jumlah Tamu <span class="lbl-en">No. of Person</span></div><div class="val text-center" id="p_jumlahTamu"></div></td>
+        <td width="25%"><div class="lbl">Harga <span class="lbl-en">Rate</span></div><div class="val" id="p_harga"></div></td>
+        <td width="25%"><div class="lbl">Kode Harga <span class="lbl-en">Rate Code</span></div><div class="val">(ADHOC)</div></td>
+      </tr>
+      <tr>
+        <td><div class="lbl">No. Folio <span class="lbl-en">Folio No.</span></div><div class="val" id="p_folio"></div></td>
+        <td><div class="lbl">Jumlah Kamar <span class="lbl-en">No. of Room</span></div><div class="val text-center">1</div></td>
+        <td><div class="lbl">Jenis Kamar <span class="lbl-en">Room Type</span></div><div class="val" id="p_tipeKamar"></div></td>
+        <td><div class="lbl">Reservation <span class="lbl-en">Receptionist</span></div><div class="val" id="p_resepsionis"></div></td>
       </tr>
     </table>
 
-    <div class="highlight-bar">Check Out Time : 12.00 Noon / Jam 12.00 Siang</div>
+    <div class="highlight-bar">
+      Check Out Time : 12.00 Noon<br>
+      Waktu Lapor Keluar : Jam 12.00 Siang
+    </div>
+    <div class="sub-bar">
+      Harap Tulis dengan Huruf Cetak &mdash; <em>Please Print in Block Letters</em>
+    </div>
 
-    <table>
+    <table class="t-main">
       <tr>
-        <td colspan="3"><div class="lbl">Nama / Name</div><div class="val" id="p_nama"></div></td>
-        <td width="25%"><div class="lbl">Check-in Time</div><div class="val" id="p_jamCI"></div></td>
+        <td colspan="3"><div class="lbl">Nama <span class="lbl-en">Name</span></div><div class="val" id="p_nama"></div></td>
+        <td width="25%"><div class="lbl">Waktu Check-in <span class="lbl-en">Check-in Time</span></div><div class="val text-center mt-10" id="p_jamMasuk"></div></td>
       </tr>
       <tr>
-        <td colspan="3"><div class="lbl">No. KTP / Paspor</div><div class="val" id="p_ktp"></div></td>
-        <td><div class="lbl">Check-in Date</div><div class="val" id="p_tglCI"></div></td>
+        <td colspan="3"><div class="lbl">Perusahaan <span class="lbl-en">Company</span></div><div class="val" id="p_perusahaan"></div></td>
+        <td><div class="lbl">Tanggal Check-in <span class="lbl-en">Check-in Date</span></div><div class="val text-center mt-10" id="p_ci"></div></td>
       </tr>
       <tr>
-        <td colspan="3"><div class="lbl">No. Handphone</div><div class="val" id="p_hp"></div></td>
-        <td><div class="lbl">Check-out Date</div><div class="val" id="p_tglCO"></div></td>
+        <td width="25%"><div class="lbl">Kebangsaan <span class="lbl-en">Nationality</span></div><div class="val">INA</div></td>
+        <td width="25%"><div class="lbl">No. KTP <span class="lbl-en">Passport No.</span></div><div class="val" id="p_ktp"></div></td>
+        <td width="25%"><div class="lbl">Tanggal Lahir <span class="lbl-en">Birth Date</span></div><div class="val" id="p_tglLahir"></div></td>
+        <td rowspan="2"><div class="lbl">Tanggal Check-out <span class="lbl-en">Check-out Date</span></div><div class="val text-center" style="margin-top: 25px;" id="p_co"></div></td>
+      </tr>
+      <tr>
+        <td colspan="2"><div class="lbl">Alamat <span class="lbl-en">Address</span></div><div class="val" style="font-weight:normal; font-size:10px;" id="p_alamat"></div></td>
+        <td>
+          <div class="lbl" style="padding:0 5px;">Email</div><div class="val" style="padding:0 5px;" id="p_email"></div>
+          <div class="divider"></div>
+          <div class="lbl" style="padding:0 5px;">Hand Phone / Mobile Phone</div><div class="val" style="padding:0 5px;" id="p_hp"></div>
+        </td>
       </tr>
     </table>
 
-    <table>
+    <table class="t-main">
       <tr>
-        <td class="rules-text" width="75%">
-          <strong>KETENTUAN MENGINAP:</strong>
-          <ul style="margin:5px 0 0 15px; padding:0;">
-            <li>Dilarang membawa hewan peliharaan, durian, & alkohol (Denda Rp 200rb - 500rb).</li>
-            <li>Dilarang merokok di kamar Non-Smoking.</li>
-            <li>Kerusakan handuk/linen (robek/noda/rokok) denda Rp 50rb - 60rb.</li>
-            <li>Kehilangan kunci kamar denda Rp 50rb.</li>
+        <td width="30%"><div class="lbl">No. Member / Member Card No</div><div class="val"></div></td>
+        <td width="25%"><div class="lbl">Cara Pembayaran <span class="lbl-en">Method of Payment</span></div><div class="val">CAS</div></td>
+        <td width="25%"><div class="lbl">No. Kartu Kredit <span class="lbl-en">Credit Card No.</span></div><div class="val"></div></td>
+        <td width="20%">
+          <div class="cb-wrapper">
+            <div><span class="cb-box"></span> Visa<br><span class="cb-box"></span> Master<br><span class="cb-box"></span> Amex</div>
+            <div><span class="cb-box"></span> Dinners<br><span class="cb-box"></span> JCB<br><span class="cb-box"></span> Other</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <table class="t-main">
+      <tr>
+        <td class="rules-text" width="65%">
+          <strong>PERNYATAAN / DECLARATION</strong>
+          <p>
+            Kepada Hotel Lavender, saya menyatakan bertanggung jawab penuh atas pembayaran seluruh tagihan pelayanan sesuai dengan formulir pendaftaran ini. Kami tegaskan bahwa Hotel Lavender tidak bertanggung jawab atas kehilangan atau kerusakan barang berharga yang tidak dititipkan secara resmi di meja resepsionis.<br>
+            <span class="lbl-en">To Hotel Lavender, I acknowledge full responsibility for the payment of all charges incurred during my stay. The hotel is not liable for any lost or misplaced items in the rooms unless properly secured at the front desk.</span>
+          </p>
+          
+          <strong>KETENTUAN MENGINAP / STAY POLICIES:</strong>
+          <ul class="rules-list">
+            <li>Dilarang membawa hewan peliharaan & buah durian. <strong>(Denda Rp 500.000,-)</strong></li>
+            <li>Dilarang membawa dan/atau mengonsumsi minuman beralkohol. <strong>(Denda Rp 200.000,-)</strong></li>
+            <li>Dilarang merokok di dalam Kamar berstatus <em>Non-Smoking</em> (daftar kamar tertera di kolom sebelah).</li>
+            <li>Kerusakan handuk (robek atau terkena bekas bakaran rokok) dikenakan biaya <strong>Rp 50.000,-</strong>.</li>
+            <li>Kerusakan berupa linen atau sprei yang robek dikenakan biaya <strong>Rp 60.000,-</strong>.</li>
+            <li>Linen atau sprei yang terkena noda membandel (seperti noda kopi, kuah berwarna, atau noda darah) dikenakan biaya pembersihan <strong>Rp 50.000,-</strong>.</li>
+            <li>Kehilangan atau kerusakan kunci kamar dikenakan biaya penggantian <strong>Rp 50.000,-</strong>.</li>
           </ul>
         </td>
-        <td width="25%" style="text-align:center;">
-          <div style="border-bottom:1px solid #000; padding:4px; font-size:9px; text-align:left;">Tanda Tangan Tamu</div>
-          <br><br><br><br><br>
+        <td width="15%" style="text-align: center; vertical-align: top; padding: 0;">
+          <div class="sig-header" style="text-align: center; border-bottom: 1px solid #5F4180;">
+            Daftar Kamar<br>Non-Smoking
+          </div>
+          <div style="font-size: 10px; font-weight: bold; margin-top: 10px; line-height: 1.8;">
+            301, 302, 303,<br>
+            304, 305, 306,<br>
+            307, 308, 309
+            <br><br>
+            <span style="font-size: 20px;">🚭</span>
+          </div>
+        </td>
+        <td class="signature-box" width="20%">
+          <div class="sig-header">Tanda Tangan Tamu<br><span class="lbl-en">Signature</span></div>
+          <br><br><br><br><br><br><br><br>
         </td>
       </tr>
     </table>
-    <p style="text-align:right; font-size:9px; font-weight:bold;" id="p_ts_bottom"></p>
+
+    <table class="t-main">
+      <tr>
+        <td width="50%"><div class="lbl">Nomor Kotak Deposit <span class="lbl-en">Safety Deposit Box Number</span></div><div class="val"></div></td>
+        <td width="25%"><div class="lbl">Dikeluarkan Oleh <span class="lbl-en">Issued by</span></div><div class="val"></div></td>
+        <td width="25%"><div class="lbl">Tanggal <span class="lbl-en">Date</span></div><div class="val"></div></td>
+      </tr>
+    </table>
+
+    <table class="t-main" style="border:none; margin-top: 10px;">
+      <tr>
+        <td class="signature-box" width="25%" style="border: 1px solid #5F4180;">
+          <div class="sig-header">Melapor masuk oleh<br><span class="lbl-en">Checked-in By</span></div>
+          <br><br><br>
+        </td>
+        <td class="signature-box" width="25%" style="border: 1px solid #5F4180; border-left:none;">
+          <div class="sig-header">Melapor keluar oleh<br><span class="lbl-en">Checked-out By</span></div>
+          <br><br><br>
+        </td>
+        <td width="50%" style="border:none; text-align:right; vertical-align:bottom; font-size:10px; font-weight:bold; color: #5F4180;" id="p_timestampKananBawah">
+        </td>
+      </tr>
+    </table>
+
   </div>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxx71bLWTkiHHpNGorU5Hyz1NVbWbFoq1CanzFQYgUKxlLOnkVUUqKGy6sBSFlrSVXl/exec"; // GANTI INI!
+    const API_URL = "URL_API_GAS_ANDA"; // JANGAN LUPA GANTI INI DENGAN LINK GOOGLE APPS SCRIPT
     let roomMasterData = [];
-    let selectedTipe = ""; let selectedHarga = "";
+    let selectedTipe = "";
+    let selectedHarga = "";
 
-    window.onload = async () => {
-      document.getElementById('loadMsg').style.display = 'block';
-      const res = await fetch(`${API_URL}?action=getRooms`);
-      roomMasterData = await res.json();
-      const s = document.getElementById("i_noKamar");
-      s.innerHTML = '<option value="">-- Pilih Kamar --</option>';
-      roomMasterData.forEach(r => s.innerHTML += `<option value="${r[0]}">${r[0]}</option>`);
-      document.getElementById('loadMsg').style.display = 'none';
+    window.onload = function() {
+      document.getElementById('loadingStatus').style.display = 'block';
+      
+      // Menggunakan fetch karena deploy di Vercel
+      fetch(`${API_URL}?action=getRooms`)
+        .then(response => response.json())
+        .then(data => {
+            roomMasterData = data;
+            const select = document.getElementById("i_noKamar");
+            select.innerHTML = '<option value="">-- Pilih Kamar --</option>';
+            
+            data.forEach(room => {
+              let opt = document.createElement("option");
+              opt.value = room[0];
+              opt.innerHTML = room[0]; 
+              select.appendChild(opt);
+            });
+            document.getElementById('loadingStatus').style.display = 'none';
+        })
+        .catch(err => {
+            document.getElementById('loadingStatus').innerText = 'Gagal memuat data. Periksa koneksi API.';
+        });
     };
 
     function updateRoomDetails() {
-      const r = roomMasterData.find(x => x[0] == document.getElementById("i_noKamar").value);
-      if(r) { selectedTipe = r[1]; selectedHarga = Number(r[2]).toLocaleString('id-ID'); }
+      const selectedNo = document.getElementById("i_noKamar").value;
+      const room = roomMasterData.find(r => r[0] == selectedNo);
+      
+      if(room) {
+        selectedTipe = room[1];
+        selectedHarga = Number(room[2]).toLocaleString('id-ID'); 
+      } else {
+        selectedTipe = "";
+        selectedHarga = "";
+      }
     }
 
-    async function proses() {
-      const btn = document.getElementById("btnAction");
-      btn.innerText = "Menyimpan Data..."; btn.disabled = true;
+    function formatTglCetak(tglInput) {
+      if(!tglInput) return "";
+      const dateObj = new Date(tglInput);
+      const bulanArr = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"];
+      return dateObj.getDate() + " " + bulanArr[dateObj.getMonth()] + " " + dateObj.getFullYear();
+    }
+
+    async function prosesCetak() {
+      const btn = document.querySelector(".btn-print");
+      btn.innerText = "SINKRONISASI DATA...";
+      btn.disabled = true;
 
       const now = new Date();
-      const ts = now.toLocaleString('id-ID');
-      const jam = now.getHours().toString().padStart(2,'0') + ":" + now.getMinutes().toString().padStart(2,'0');
+      const jamMasuk = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
+      const timeStampSystem = String(now.getDate()).padStart(2, '0') + "/" + 
+                              String(now.getMonth()+1).padStart(2, '0') + "/" + 
+                              now.getFullYear() + " " + 
+                              jamMasuk + ":" + String(now.getSeconds()).padStart(2, '0');
 
       const payload = {
-        noKamar: document.getElementById('i_noKamar').value,
-        namaTamu: document.getElementById('i_nama').value,
-        noKtp: document.getElementById('i_ktp').value,
-        noHp: document.getElementById('i_hp').value,
-        tglCI: document.getElementById('i_ci').value,
-        tglCO: document.getElementById('i_co').value,
-        resepsionis: document.getElementById('i_resepsionis').value
+          noKamar: document.getElementById('i_noKamar').value,
+          namaTamu: document.getElementById('i_nama').value,
+          noKtp: document.getElementById('i_ktp').value,
+          noHp: document.getElementById('i_hp').value,
+          jumlahTamu: document.getElementById('i_jumlahTamu').value,
+          perusahaan: document.getElementById('i_perusahaan').value,
+          tglLahir: document.getElementById('i_tglLahir').value,
+          tglCI: document.getElementById('i_ci').value,
+          tglCO: document.getElementById('i_co').value
       };
 
       try {
-        await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
-        
-        // Isi Template Cetak
-        document.getElementById('p_noKamar').innerText = payload.noKamar;
-        document.getElementById('p_harga').innerText = selectedHarga;
-        document.getElementById('p_nama').innerText = payload.namaTamu;
-        document.getElementById('p_ktp').innerText = payload.noKtp;
-        document.getElementById('p_hp').innerText = payload.noHp;
-        document.getElementById('p_tglCI').innerText = payload.tglCI;
-        document.getElementById('p_tglCO').innerText = payload.tglCO;
-        document.getElementById('p_jamCI').innerText = jam;
-        document.getElementById('p_ts_top').innerText = ts;
-        document.getElementById('p_ts_bottom').innerText = ts;
+          // Kirim data ke Google Sheets
+          await fetch(API_URL, {
+              method: "POST",
+              body: JSON.stringify(payload)
+          });
 
-        window.print();
-      } catch (e) { alert("Gagal menyimpan!"); }
-      finally { btn.innerText = "Simpan & Cetak"; btn.disabled = false; }
+          // Pindahkan data ke form cetak
+          document.getElementById('p_folio').innerText = Math.floor(100000 + Math.random() * 900000);
+          document.getElementById('p_jamMasuk').innerText = jamMasuk;
+          document.getElementById('p_timestampKananAtas').innerText = timeStampSystem;
+          document.getElementById('p_timestampKananBawah').innerText = timeStampSystem;
+          document.getElementById('p_noKamar').innerText = payload.noKamar;
+          document.getElementById('p_tipeKamar').innerText = selectedTipe;
+          document.getElementById('p_harga').innerText = selectedHarga;
+          document.getElementById('p_resepsionis').innerText = document.getElementById('i_resepsionis').value;
+          document.getElementById('p_jumlahTamu').innerText = payload.jumlahTamu;
+          document.getElementById('p_nama').innerText = payload.namaTamu;
+          document.getElementById('p_perusahaan').innerText = payload.perusahaan;
+          document.getElementById('p_ktp').innerText = payload.noKtp;
+          document.getElementById('p_alamat').innerText = document.getElementById('i_alamat').value;
+          document.getElementById('p_email').innerText = document.getElementById('i_email').value;
+          document.getElementById('p_hp').innerText = payload.noHp;
+          document.getElementById('p_tglLahir').innerText = formatTglCetak(payload.tglLahir);
+          document.getElementById('p_ci').innerText = formatTglCetak(payload.tglCI);
+          document.getElementById('p_co').innerText = formatTglCetak(payload.tglCO);
+
+          window.print();
+      } catch (err) {
+          alert("Gagal menyimpan ke database, tapi Anda tetap bisa mencetak form.");
+          window.print();
+      } finally {
+          btn.innerText = "Proses & Cetak Formulir";
+          btn.disabled = false;
+      }
     }
   </script>
+
 </body>
 </html>
