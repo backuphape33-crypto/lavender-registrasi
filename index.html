@@ -452,6 +452,12 @@
             
             // Tampilkan yang dipilih
             document.getElementById('sec-' + tabId).classList.remove('hidden');
+            document.getElementById('nav-' + tabId).classList.add('active');
+
+            if(tabId === 'riwayat') renderHistory();
+            if(tabId === 'dashboard') updateDashboard();
+        }
+
         // FUNGSI SIMPAN DATA KE GOOGLE SHEETS & LOKAL
         async function simpanRegistrasi(event) {
             event.preventDefault(); // Mencegah halaman reload saat submit
