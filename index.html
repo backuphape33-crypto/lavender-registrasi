@@ -372,32 +372,48 @@
 
         <table class="p-table">
             <tr>
-                <td class="p-rules" width="65%">
+                <td class="p-rules" width="60%">
                     <strong>PERNYATAAN / DECLARATION</strong>
-                    <p style="color:#000;">
+                    <p style="color:#000; margin-bottom: 5px;">
                         Kepada Hotel Lavender, saya menyatakan bertanggung jawab penuh atas pembayaran seluruh tagihan pelayanan sesuai dengan formulir pendaftaran ini. Kami tegaskan bahwa Hotel Lavender tidak bertanggung jawab atas kehilangan atau kerusakan barang berharga yang tidak dititipkan secara resmi di meja resepsionis.<br>
                         <span class="p-lbl-en">To Hotel Lavender, I acknowledge full responsibility for the payment of all charges incurred during my stay. The hotel is not liable for any lost or misplaced items in the rooms unless properly secured at the front desk.</span>
                     </p>
                     <strong>KETENTUAN MENGINAP / STAY POLICIES:</strong>
                     <ul style="margin: 3px 0 0 15px; padding: 0; color:#000;">
-                        <li>Dilarang membawa hewan peliharaan & buah durian. <strong>(Denda Rp 500.000,-)</strong></li>
-                        <li>Dilarang membawa dan/atau mengonsumsi minuman beralkohol. <strong>(Denda Rp 200.000,-)</strong></li>
-                        <li>Dilarang merokok di dalam Kamar berstatus <em>Non-Smoking</em>.</li>
-                        <li>Kerusakan handuk (robek/bakaran rokok) dikenakan biaya <strong>Rp 50.000,-</strong>.</li>
-                        <li>Kerusakan linen/sprei yang robek dikenakan biaya <strong>Rp 60.000,-</strong>.</li>
-                        <li>Linen/sprei terkena noda membandel dikenakan biaya <strong>Rp 50.000,-</strong>.</li>
-                        <li>Kehilangan kunci kamar dikenakan biaya penggantian <strong>Rp 50.000,-</strong>.</li>
+                        <li style="margin-bottom: 4px;">Dilarang membawa hewan peliharaan & buah durian. <strong>(Denda Rp 500.000,-)</strong><br>
+                            <span class="p-lbl-en">Pets and durian fruit are strictly prohibited. <strong>(Fine: IDR 500,000)</strong></span></li>
+                        <li style="margin-bottom: 4px;">Dilarang membawa dan/atau mengonsumsi minuman beralkohol. <strong>(Denda Rp 200.000,-)</strong><br>
+                            <span class="p-lbl-en">Bringing and/or consuming alcoholic beverages is prohibited. <strong>(Fine: IDR 200,000)</strong></span></li>
+                        <li style="margin-bottom: 4px;">Dilarang merokok di dalam Kamar berstatus <em>Non-Smoking</em>.<br>
+                            <span class="p-lbl-en">Smoking is prohibited in Non-Smoking Rooms.</span></li>
+                        <li style="margin-bottom: 4px;">Kerusakan handuk (robek/bakaran rokok) dikenakan biaya <strong>Rp 50.000,-</strong>.<br>
+                            <span class="p-lbl-en">Damaged towels (torn/cigarette burns) will be charged <strong>IDR 50,000</strong>.</span></li>
+                        <li style="margin-bottom: 4px;">Kerusakan linen/sprei yang robek dikenakan biaya <strong>Rp 60.000,-</strong>.<br>
+                            <span class="p-lbl-en">Torn linens/bedsheets will be charged <strong>IDR 60,000</strong>.</span></li>
+                        <li style="margin-bottom: 4px;">Linen/sprei terkena noda membandel dikenakan biaya <strong>Rp 50.000,-</strong>.<br>
+                            <span class="p-lbl-en">Stubborn stains on linens/bedsheets will be charged <strong>IDR 50,000</strong>.</span></li>
+                        <li style="margin-bottom: 4px;">Kehilangan kunci kamar dikenakan biaya penggantian <strong>Rp 50.000,-</strong>.<br>
+                            <span class="p-lbl-en">Lost room keys will incur a replacement fee of <strong>IDR 50,000</strong>.</span></li>
                     </ul>
                 </td>
-                <td width="15%" style="text-align: center; vertical-align: top; padding: 0;">
-                    <div class="p-sig-head" style="text-align: center;">Daftar Kamar<br>Non-Smoking</div>
-                    <div style="font-size: 10px; font-weight: bold; margin-top: 10px; line-height: 1.8; color:#000;">
-                        301, 302, 303,<br>304, 305, 306,<br>307, 308, 309
+                <td width="20%" style="vertical-align: top; padding: 0;">
+                    <div class="p-sig-head" style="text-align: center;">Daftar Kamar<br>Non-Smoking 🚭</div>
+                    <div style="font-size: 8.5px; font-weight: bold; margin-top: 5px; padding: 0 5px; line-height: 1.5; color:#000;">
+                        <ul style="margin: 0 0 0 15px; padding: 0;">
+                            <li>101 (VIP 2)</li>
+                            <li>102 (VIP 2)</li>
+                            <li>103 (VIP 2)</li>
+                            <li>206 (VIP 1)</li>
+                            <li>207 (VIP 1)</li>
+                            <li>208 (VIP 1)</li>
+                            <li>219 (VIP 1)</li>
+                            <li>222 (VIP 2)</li>
+                        </ul>
                     </div>
                 </td>
                 <td class="p-sig" width="20%">
                     <div class="p-sig-head">Tanda Tangan Tamu<br><span class="p-lbl-en">Signature</span></div>
-                    <br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br>
                 </td>
             </tr>
         </table>
@@ -418,7 +434,8 @@
                 <td class="p-sig" width="25%" style="border: 1px solid #000; border-left:none;">
                     <div class="p-sig-head">Melapor keluar oleh<br><span class="p-lbl-en">Checked-out By</span></div><br><br><br>
                 </td>
-                <td width="50%" style="border:none; text-align:right; vertical-align:bottom; font-size:10px; font-weight:bold; color: #000;" id="p_timestampKananBawah"></td>
+                <!-- ID p_timestampKananBawah dihapus agar tidak menampilkan tanggal di pojok -->
+                <td width="50%" style="border:none; text-align:right; vertical-align:bottom; font-size:10px; font-weight:bold; color: #000;"></td>
             </tr>
         </table>
     </div>
@@ -643,7 +660,6 @@
             document.getElementById('p_jamMasuk').innerText = data.jam;
             const tsFormat = `${data.tglBuat} ${data.jam}:00`;
             document.getElementById('p_timestampKananAtas').innerText = tsFormat;
-            document.getElementById('p_timestampKananBawah').innerText = tsFormat;
             document.getElementById('p_noKamar').innerText = data.noKamar;
             document.getElementById('p_tipeKamar').innerText = data.tipeKamar;
             document.getElementById('p_harga').innerText = data.harga;
