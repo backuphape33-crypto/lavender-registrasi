@@ -135,10 +135,11 @@
                     <h2 class="text-lg font-bold text-white">Formulir Registrasi Tamu</h2>
                 </div>
                 <div class="p-8">
-                    <form id="regForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- UBAH JADI ONSUBMIT AGAR VALIDASI HTML5 JALAN -->
+                    <form id="regForm" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="simpanRegistrasi(event)">
                         
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor Kamar</label>
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor Kamar <span class="text-red-500">*</span></label>
                             <select id="i_noKamar" onchange="updateRoomDetails()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] focus:border-[#5F4180] outline-none transition-all" required>
                                 <option value="">-- Pilih Kamar --</option>
                                 <option value="101" data-tipe="VIP 2" data-harga="275000">101 - VIP 2</option>
@@ -148,53 +149,55 @@
                         </div>
 
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Resepsionis</label>
-                            <input type="text" id="i_resepsionis" placeholder="Nama Resepsionis" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Resepsionis <span class="text-red-500">*</span></label>
+                            <input type="text" id="i_resepsionis" placeholder="Nama Resepsionis" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
 
                         <div class="flex flex-col md:col-span-2">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nama Tamu Lengkap</label>
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nama Tamu Lengkap <span class="text-red-500">*</span></label>
                             <input type="text" id="i_nama" placeholder="Sesuai KTP" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
 
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor KTP</label>
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor KTP <span class="text-red-500">*</span></label>
                             <input type="text" id="i_ktp" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
 
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor HP</label>
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor HP <span class="text-red-500">*</span></label>
                             <input type="text" id="i_hp" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
 
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Check-In Date</label>
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Check-In Date <span class="text-red-500">*</span></label>
                             <input type="date" id="i_ci" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
 
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Check-Out Date</label>
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Check-Out Date <span class="text-red-500">*</span></label>
                             <input type="date" id="i_co" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
                         
                         <div class="flex flex-col">
-                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Jumlah Tamu</label>
-                            <input type="number" id="i_jumlahTamu" value="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Jumlah Tamu <span class="text-red-500">*</span></label>
+                            <input type="number" id="i_jumlahTamu" value="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
                         </div>
 
                         <div class="flex flex-col">
+                            <!-- TIDAK ADA BINTANG DAN TIDAK REQUIRED -->
                             <label class="text-xs font-bold text-gray-600 uppercase mb-2">Asal Reservasi</label>
                             <input type="text" id="i_perusahaan" placeholder="Contoh: Traveloka" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none">
                         </div>
 
                         <div class="flex flex-col md:col-span-2">
+                            <!-- TIDAK ADA BINTANG DAN TIDAK REQUIRED -->
                             <label class="text-xs font-bold text-gray-600 uppercase mb-2">Alamat Lengkap</label>
                             <textarea id="i_alamat" rows="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none"></textarea>
                         </div>
 
                         <div class="md:col-span-2 mt-4 pt-4 border-t border-gray-200">
-                            <!-- TOMBOL SIMPAN (TIDAK CETAK LANGSUNG) -->
-                            <button type="button" onclick="simpanRegistrasi()" class="w-full bg-[#5F4180] hover:bg-[#4a3266] text-white font-bold py-4 rounded-lg shadow-md transition-colors text-lg">
+                            <!-- UBAH TIPE BUTTON MENJADI SUBMIT -->
+                            <button type="submit" id="btn-submit-reg" class="w-full bg-[#5F4180] hover:bg-[#4a3266] text-white font-bold py-4 rounded-lg shadow-md transition-colors text-lg">
                                 Simpan Data Registrasi
                             </button>
                         </div>
@@ -426,6 +429,9 @@
         // INISIALISASI DATA (MENGGUNAKAN LOCALSTORAGE AGAR LANGSUNG BERFUNGSI)
         let dbRiwayat = JSON.parse(localStorage.getItem('lavender_history')) || [];
         let tempDeleteId = null;
+        
+        // PASTE URL API GOOGLE APPS SCRIPT ANDA DI SINI
+        const API_URL = "https://script.google.com/macros/s/AKfycbxx71bLWTkiHHpNGorU5Hyz1NVbWbFoq1CanzFQYgUKxlLOnkVUUqKGy6sBSFlrSVXl/exec"; 
 
         // Set default date hari ini pada form registrasi
         window.onload = () => {
@@ -446,36 +452,14 @@
             
             // Tampilkan yang dipilih
             document.getElementById('sec-' + tabId).classList.remove('hidden');
-            document.getElementById('nav-' + tabId).classList.add('active');
+        // FUNGSI SIMPAN DATA KE GOOGLE SHEETS & LOKAL
+        async function simpanRegistrasi(event) {
+            event.preventDefault(); // Mencegah halaman reload saat submit
 
-            if(tabId === 'riwayat') renderHistory();
-            if(tabId === 'dashboard') updateDashboard();
-        }
-
-        // AUTOFILL HARGA & TIPE KAMAR DARI DROPDOWN
-        let selectedTipe = "";
-        let selectedHarga = "";
-        function updateRoomDetails() {
-            const select = document.getElementById("i_noKamar");
-            const opt = select.options[select.selectedIndex];
-            if(opt.value) {
-                selectedTipe = opt.getAttribute('data-tipe');
-                selectedHarga = Number(opt.getAttribute('data-harga')).toLocaleString('id-ID');
-            } else {
-                selectedTipe = ""; selectedHarga = "";
-            }
-        }
-
-        // FUNGSI SIMPAN DATA (TIDAK CETAK)
-        function simpanRegistrasi() {
-            // Validasi Form
-            const reqIds = ['i_noKamar', 'i_nama', 'i_ktp', 'i_hp', 'i_ci', 'i_co'];
-            for(let id of reqIds) {
-                if(!document.getElementById(id).value) {
-                    alert("Mohon lengkapi data yang wajib (Nama, Kamar, KTP, HP, CI/CO)!");
-                    return;
-                }
-            }
+            const btn = document.getElementById('btn-submit-reg');
+            const originalText = btn.innerText;
+            btn.innerText = "Menyimpan ke Database...";
+            btn.disabled = true;
 
             const now = new Date();
             const timestampData = now.toISOString(); // Untuk filter
@@ -499,21 +483,43 @@
                 tamu: document.getElementById('i_jumlahTamu').value,
                 perusahaan: document.getElementById('i_perusahaan').value,
                 alamat: document.getElementById('i_alamat').value,
-                email: document.getElementById('i_email').value,
-                tglLahir: document.getElementById('i_tglLahir').value,
+                email: "", // Email opsional dihilangkan dari form, set kosong
+                tglLahir: "", // Opsional
                 resepsionis: document.getElementById('i_resepsionis').value
             };
 
-            // Simpan ke array & localStorage
-            dbRiwayat.unshift(payload); // Masukkan di paling atas
-            localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
+            try {
+                // 1. Kirim Data ke Google Sheets
+                // Jika API_URL diisi, maka dia akan mengirim data
+                if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
+                    await fetch(API_URL, {
+                        method: "POST",
+                        body: JSON.stringify(payload)
+                    });
+                }
 
-            // Reset Form & Tampilkan Notifikasi Pop-up
-            document.getElementById('regForm').reset();
-            document.getElementById('i_ci').value = new Date().toISOString().split('T')[0];
-            document.getElementById('modal-success').classList.remove('hidden');
-            
-            // Catatan: Jika ingin integrasi ke Google Sheets, tambahkan fetch(API_URL, {method:'POST', body:...}) di baris ini.
+                // 2. Simpan ke Riwayat Lokal (Agar langsung muncul di tabel tanpa reload)
+                dbRiwayat.unshift(payload);
+                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
+
+                // 3. Reset Form & Tampilkan Notifikasi Pop-up
+                document.getElementById('regForm').reset();
+                document.getElementById('i_ci').value = new Date().toISOString().split('T')[0];
+                document.getElementById('modal-success').classList.remove('hidden');
+                
+                // Update Dashboard & Riwayat
+                updateDashboard();
+                if(!document.getElementById('sec-riwayat').classList.contains('hidden')) {
+                    renderHistory();
+                }
+
+            } catch (error) {
+                alert("Gagal terhubung ke Database Google Sheets. Pastikan link API sudah benar.");
+                console.error("Error saving to database:", error);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
         }
 
         function closeModal() {
