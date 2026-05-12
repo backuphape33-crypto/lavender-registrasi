@@ -46,10 +46,9 @@
                 position: absolute; 
                 left: 0; top: 0; 
                 width: 100%; 
-                padding: 10mm; /* Dikurangi agar lebih muat */
+                padding: 10mm; 
                 background: white;
                 color: #000;
-                /* SCALE AGAR MUAT 1 HALAMAN A4 */
                 transform: scale(0.92);
                 transform-origin: top left;
                 height: 99vh;
@@ -57,7 +56,7 @@
             }
 
             .print-brand { display: flex; align-items: center; gap: 15px; }
-            .print-brand img { width: 45px; }
+            .print-brand img { width: 45px; object-fit: contain; }
             .print-brand h1 { font-family: 'Playfair Display', serif; color: var(--lavender); margin: 0; font-size: 24px; letter-spacing: 1px; }
             .print-brand p { margin: 0; font-size: 9px; letter-spacing: 1px; color: #333; }
             
@@ -79,8 +78,8 @@
             .p-rules p { margin: 0 0 5px 0; }
             .p-rules strong { color: var(--lavender); }
             
-            .p-sig { text-align: center; vertical-align: top; padding: 0 !important; }
-            .p-sig-head { font-size: 9px; border-bottom: 1px solid #000; padding: 4px; text-align: left; font-weight: bold; }
+            .p-sig-head { font-size: 9px; padding: 4px; text-align: left; font-weight: bold; }
+            .icon-prohibit { width: 22px; height: auto; display: inline-block; }
         }
     </style>
 </head>
@@ -89,7 +88,8 @@
     <!-- MOBILE TOP HEADER (HANYA TAMPIL DI HP) -->
     <div class="md:hidden flex items-center justify-between bg-[#5F4180] text-white p-4 z-20 shadow-md">
         <div class="flex items-center font-bold text-lg">
-            <div class="w-8 h-8 rounded bg-white text-[#5F4180] flex items-center justify-center mr-3 font-bold">L</div>
+            <!-- LOGO HOTEL LAVENDER -->
+            <img src="./logo-hotel.png" alt="Logo" class="w-8 h-8 rounded mr-3 object-contain" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-white','text-[#5F4180]');">
             Hotel Lavender
         </div>
         <button onclick="toggleSidebar()" class="p-2 focus:outline-none focus:bg-[#4a3266] rounded-lg">
@@ -104,7 +104,8 @@
     <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out z-30">
         <div class="h-20 flex items-center justify-between px-6 border-b border-gray-100">
             <div class="flex items-center">
-                <div class="w-8 h-8 rounded bg-[#5F4180] flex items-center justify-center text-white font-bold text-xl mr-3">L</div>
+                <!-- LOGO HOTEL LAVENDER -->
+                <img src="./logo-hotel.png" alt="Logo" class="w-8 h-8 rounded mr-3 object-contain" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-[#5F4180]');">
                 <div>
                     <h1 class="font-bold text-[#5F4180] text-lg leading-tight">Hotel Lavender</h1>
                     <p class="text-xs text-gray-500">Management System</p>
@@ -294,7 +295,7 @@
                 <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Berhasil!</h3>
-            <p class="text-gray-500 text-sm mb-6">Data registrasi tamu telah berhasil disimpan ke dalam sistem.</p>
+            <p class="text-gray-500 text-sm mb-6">Data registrasi tamu telah berhasil disimpan ke dalam database sistem.</p>
             <button onclick="closeModal()" class="w-full bg-[#5F4180] text-white font-bold py-3 rounded-lg hover:bg-[#4a3266] transition-colors">Tutup</button>
         </div>
     </div>
@@ -306,7 +307,7 @@
                 <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Hapus Data?</h3>
-            <p class="text-gray-500 text-sm mb-6">Apakah Anda yakin ingin menghapus data ini? (Perhatian: Data ini hanya dihapus dari tampilan saat ini, hapus permanen tetap melalui Excel).</p>
+            <p class="text-gray-500 text-sm mb-6">Apakah Anda yakin ingin menghapus data ini dari tampilan ini?</p>
             <div class="flex gap-3">
                 <button onclick="closeDeleteModal()" class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-200 transition-colors">Batal</button>
                 <button id="btn-confirm-delete" class="flex-1 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition-colors">Hapus</button>
@@ -321,14 +322,15 @@
         
         <div class="print-brand" style="margin-bottom: 20px; justify-content: space-between;">
             <div style="display: flex; gap: 10px; align-items: center;">
-                <img src="logo-hotel.png" alt="Logo" onerror="this.style.display='none'">
+                <!-- LOGO HOTEL LAVENDER -->
+                <img src="./logo-hotel.png" alt="Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-[#5F4180]');">
                 <div>
                     <h1>HOTEL LAVENDER</h1>
                     <p>SUNGAI CUKA - TANAH BUMBU</p>
                 </div>
             </div>
             <div class="print-title">
-                <h2>Formulir Pendaftaran /<br>Registration Form</h2>
+                <h2>Formulir Pendaftaran /<br><span style="font-style: italic;">Registration Form</span></h2>
                 <p id="p_timestampKananAtas"></p>
             </div>
         </div>
@@ -435,9 +437,24 @@
                         </ul>
                     </div>
                 </td>
-                <td class="p-sig" width="20%">
-                    <div class="p-sig-head">Tanda Tangan Tamu<br><span class="p-lbl-en">Signature</span></div>
-                    <br><br><br><br><br><br><br><br>
+                <!-- TANDA TANGAN DIBAGI 2 BARIS DENGAN ICON -->
+                <td width="20%" style="padding: 0; vertical-align: top;">
+                    <table style="width: 100%; height: 100%; border-collapse: collapse; border: none;">
+                        <tr>
+                            <td style="border: none; padding: 0; vertical-align: top; height: 100px;">
+                                <div class="p-sig-head" style="border-bottom:none;">Tanda Tangan Tamu<br><span class="p-lbl-en">Signature</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none; border-top: 1px solid #000; padding: 6px 0; text-align: center; vertical-align: middle; background-color: #fafafa;">
+                                <!-- Ikon open-source (Icons8) -->
+                                <img src="https://img.icons8.com/color/48/no-dogs.png" class="icon-prohibit" alt="No Pets">
+                                <img src="https://img.icons8.com/color/48/no-alcohol.png" class="icon-prohibit" alt="No Alcohol">
+                                <img src="https://img.icons8.com/color/48/no-smoking.png" class="icon-prohibit" alt="No Smoking">
+                                <img src="https://img.icons8.com/color/48/no-audio--v1.png" class="icon-prohibit" alt="No Noise">
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
@@ -458,24 +475,20 @@
                 <td class="p-sig" width="25%" style="border: 1px solid #000; border-left:none;">
                     <div class="p-sig-head">Melapor keluar oleh<br><span class="p-lbl-en">Checked-out By</span></div><br><br><br>
                 </td>
-                <!-- Timestamp Bawah dihilangkan sesuai permintaan -->
-                <td width="50%" style="border:none; text-align:right; vertical-align:bottom; font-size:10px; font-weight:bold; color: #000;"></td>
             </tr>
         </table>
     </div>
 
     <script>
-        // PASTE URL API GOOGLE APPS SCRIPT ANDA DI SINI
-        const API_URL = "https://script.google.com/macros/s/AKfycbwMpunNJ39O7pTFwBvpy_A2R05jUhlvWX1Y-8KYEl2eNSW_Jrj3MWp3V0wWIm1HJjxCZg/exec"; 
+        // LINK API GOOGLE APPS SCRIPT BARU
+        const API_URL = "https://script.google.com/macros/s/AKfycbwx7kCj1HdFOIuGNNHei5z2i3WSDI9mR-tkf1m_yN1zoFtL4EtiiSqA-52hvghyHrex9Q/exec"; 
 
-        // DATA CLOUD (Bukan lagi localStorage)
         let dbRiwayat = []; 
         let tempDeleteId = null;
         let roomMasterData = [];
         let selectedTipe = "";
         let selectedHarga = "";
 
-        // TOGGLE SIDEBAR MOBILE
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
@@ -487,32 +500,28 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('i_ci').value = today;
 
-            // AMBIL DATA KAMAR DARI GOOGLE SHEETS
             const loadMsg = document.getElementById('loadMsg');
             const selectKamar = document.getElementById("i_noKamar");
             
-            if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
-                try {
-                    if(loadMsg) loadMsg.classList.remove('hidden');
-                    
-                    const res = await fetch(`${API_URL}?action=getRooms`, { redirect: "follow" });
-                    roomMasterData = await res.json();
-                    
-                    selectKamar.innerHTML = '<option value="">-- Pilih Kamar --</option>';
-                    roomMasterData.forEach(r => {
-                        selectKamar.innerHTML += `<option value="${r[0]}">${r[0]}</option>`;
-                    });
+            try {
+                if(loadMsg) loadMsg.classList.remove('hidden');
+                
+                // MENGGUNAKAN GET UNTUK MENGAMBIL DATA KAMAR
+                const res = await fetch(`${API_URL}?action=getRooms`);
+                roomMasterData = await res.json();
+                
+                selectKamar.innerHTML = '<option value="">-- Pilih Kamar --</option>';
+                roomMasterData.forEach(r => {
+                    selectKamar.innerHTML += `<option value="${r[0]}">${r[0]}</option>`;
+                });
 
-                    // SETELAH KAMAR, AMBIL RIWAYAT CLOUD
-                    fetchHistory();
-                } catch(e) {
-                    console.error("Gagal load data API:", e);
-                    selectKamar.innerHTML = '<option value="">Gagal memuat database</option>';
-                } finally {
-                    if(loadMsg) loadMsg.classList.add('hidden');
-                }
-            } else {
-                selectKamar.innerHTML = '<option value="">ISI LINK API GOOGLE SCRIPT DULU!</option>';
+                // SETELAH KAMAR, AMBIL RIWAYAT DARI DATABASE GOOGLE SHEETS
+                fetchHistory();
+            } catch(e) {
+                console.error("Gagal load data API:", e);
+                selectKamar.innerHTML = '<option value="">Gagal memuat database</option>';
+            } finally {
+                if(loadMsg) loadMsg.classList.add('hidden');
             }
         };
 
@@ -520,20 +529,25 @@
         async function fetchHistory() {
             const emptyState = document.getElementById('history-empty');
             if(emptyState) {
-                emptyState.innerHTML = '<p>Sedang mensinkronisasi data dari Cloud...</p>';
+                emptyState.innerHTML = '<p>Sedang mensinkronisasi data dari Database Google Sheets...</p>';
                 emptyState.classList.remove('hidden');
             }
             try {
-                const res = await fetch(`${API_URL}?action=getHistory`, { redirect: "follow" });
+                const res = await fetch(`${API_URL}?action=getHistory`);
                 const data = await res.json();
                 if(data && Array.isArray(data)) {
                     dbRiwayat = data;
                     renderHistory();
                     updateDashboard();
+                } else {
+                    if(emptyState) emptyState.innerHTML = '<p>Belum ada data registrasi.</p>';
                 }
             } catch (e) {
                 console.error("Gagal menarik history:", e);
-                if(emptyState) emptyState.innerHTML = '<p class="text-red-500">Gagal menarik data riwayat dari database.</p>';
+                // JIKA GAGAL INTERNET, FALLBACK KE LOKAL
+                dbRiwayat = JSON.parse(localStorage.getItem('lavender_history')) || [];
+                renderHistory();
+                updateDashboard();
             }
         }
 
@@ -562,7 +576,6 @@
             if(tabId === 'riwayat') renderHistory();
             if(tabId === 'dashboard') updateDashboard();
             
-            // Tutup sidebar otomatis di HP setelah memilih menu
             const sidebar = document.getElementById('sidebar');
             if(!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
                 toggleSidebar();
@@ -574,7 +587,7 @@
 
             const btn = document.getElementById('btn-submit-reg');
             const originalText = btn.innerText;
-            btn.innerText = "Menyimpan ke Database Cloud...";
+            btn.innerText = "Menyimpan ke Database...";
             btn.disabled = true;
 
             const now = new Date();
@@ -605,17 +618,21 @@
             };
 
             try {
-                if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
-                    await fetch(API_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify(payload),
-                        redirect: "follow"
-                    });
+                // KIRIM POST KE GOOGLE SHEETS
+                // Menggunakan fetch POST dengan form-urlencoded atau text/plain menghindari blokir preflight CORS
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                   console.warn("Response API tidak OK, tapi akan tetap dilanjutkan ke lokal.");
                 }
 
-                // Tambahkan langsung ke UI sementara menunggu Refresh API
+                // Tambahkan langsung ke UI sementara
                 dbRiwayat.unshift(payload);
+                // Backup ke lokal jika internet bermasalah di kemudian hari
+                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
 
                 document.getElementById('regForm').reset();
                 document.getElementById('i_ci').value = new Date().toISOString().split('T')[0];
@@ -625,7 +642,12 @@
                 if(!document.getElementById('sec-riwayat').classList.contains('hidden')) renderHistory();
 
             } catch (error) {
-                alert("Gagal terhubung ke Database Google Sheets. Pastikan link API sudah benar.");
+                console.error(error);
+                alert("Proses penyimpanan database terhambat jaringan. Data diamankan ke memori lokal.");
+                // Tetap simpan ke lokal
+                dbRiwayat.unshift(payload);
+                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
+                document.getElementById('modal-success').classList.remove('hidden');
             } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
@@ -706,7 +728,6 @@
             document.getElementById('p_ci').innerText = formatTgl(data.ci);
             document.getElementById('p_co').innerText = formatTgl(data.co);
 
-            // Set timeout memberikan waktu pada browser HP untuk merender data ke template sebelum jendela cetak muncul
             setTimeout(() => {
                 window.print();
             }, 300);
@@ -725,10 +746,8 @@
                     dbRiwayat = dbRiwayat.filter(d => d.id !== tempDeleteId);
                 }
                 
-                // CATATAN: Fungsi hapus ini hanya menghapus dari layar web sementara.
-                // Jika web direfresh, ia akan memuat ulang dari Google Sheets (karena Sheets tidak mendukung hapus via API kita saat ini).
-                // Untuk menghapus permanen, admin harus menghapusnya langsung dari Excel Google Sheets.
-                
+                // CATATAN: Fungsi hapus ini hanya menghapus dari layar web sementara dan local storage
+                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
                 closeDeleteModal();
                 renderHistory();
                 updateDashboard();
