@@ -445,11 +445,12 @@
             const loadMsg = document.getElementById('loadMsg');
             const selectKamar = document.getElementById("i_noKamar");
             
-            if(API_URL !== "https://script.google.com/macros/s/AKfycbwMpunNJ39O7pTFwBvpy_A2R05jUhlvWX1Y-8KYEl2eNSW_Jrj3MWp3V0wWIm1HJjxCZg/exec" && API_URL !== "") {
+            if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
                 try {
                     if(loadMsg) loadMsg.classList.remove('hidden');
                     
-                    const res = await fetch(`${API_URL}?action=getRooms`);
+                    // Tambahkan redirect: "follow" agar Vercel bisa melewati keamanan Google
+                    const res = await fetch(`${API_URL}?action=getRooms`, { redirect: "follow" });
                     roomMasterData = await res.json();
                     
                     selectKamar.innerHTML = '<option value="">-- Pilih Kamar --</option>';
@@ -538,10 +539,14 @@
             try {
                 // 1. Kirim Data ke Google Sheets
                 // Jika API_URL diisi, maka dia akan mengirim data
-                if(API_URL !== "https://script.google.com/macros/s/AKfycbwMpunNJ39O7pTFwBvpy_A2R05jUhlvWX1Y-8KYEl2eNSW_Jrj3MWp3V0wWIm1HJjxCZg/exec" && API_URL !== "") {
+                if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
                     await fetch(API_URL, {
                         method: "POST",
-                        body: JSON.stringify(payload)
+                        headers: {
+                            "Content-Type": "text/plain;charset=utf-8",
+                        },
+                        body: JSON.stringify(payload),
+                        redirect: "follow"
                     });
                 }
 
