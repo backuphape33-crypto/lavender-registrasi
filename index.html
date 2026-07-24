@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Hotel Lavender</title>
-    <!-- Tailwind CSS untuk UI Web -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
@@ -15,30 +14,23 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; margin: 0; }
         
-        /* FIX HOVER MENU */
         .nav-item { transition: all 0.3s ease; }
         .nav-item.active { background-color: var(--lavender); color: white; }
         .nav-item.active svg { stroke: white; }
         .nav-item:not(.active):hover { background-color: var(--lavender-light); color: var(--lavender); }
         .nav-item:not(.active):hover svg { stroke: var(--lavender); }
         
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #c0a0c3; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--lavender); }
 
-        /* Modal Styles */
         .modal-overlay { background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(2px); }
 
-        /* =========================================
-           TAMPILAN CETAK (PRINT TEMPLATE)
-           ========================================= */
         .print-area { display: none; }
         
         @media print {
             @page { size: A4 portrait; margin: 0; }
-            
             body * { visibility: hidden; }
             .print-area, .print-area * { visibility: visible; }
             .print-area { 
@@ -79,13 +71,13 @@
             .p-rules strong { color: var(--lavender); }
             
             .p-sig-head { font-size: 9px; padding: 4px; text-align: left; font-weight: bold; }
-            .icon-prohibit { width: 28px; height: auto; display: block; margin: 0 auto; }
+            .icon-prohibit { width: 22px; height: auto; display: inline-block; }
         }
     </style>
 </head>
 <body class="flex flex-col md:flex-row h-screen overflow-hidden text-gray-800">
 
-    <!-- MOBILE TOP HEADER (HANYA TAMPIL DI HP) -->
+    <!-- MOBILE HEADER -->
     <div class="md:hidden flex items-center justify-between bg-[#5F4180] text-white p-4 z-20 shadow-md">
         <div class="flex items-center font-bold text-lg">
             <img src="./logo-hotel.png" alt="Logo" class="w-8 h-8 rounded mr-3 object-contain" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-white','text-[#5F4180]');">
@@ -96,10 +88,9 @@
         </button>
     </div>
 
-    <!-- SIDEBAR OVERLAY (UNTUK HP) -->
     <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden transition-opacity"></div>
 
-    <!-- SIDEBAR NAVIGATION -->
+    <!-- SIDEBAR -->
     <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out z-30">
         <div class="h-20 flex items-center justify-between px-6 border-b border-gray-100">
             <div class="flex items-center">
@@ -109,7 +100,6 @@
                     <p class="text-xs text-gray-500">Management System</p>
                 </div>
             </div>
-            <!-- Tombol Tutup Sidebar untuk HP -->
             <button onclick="toggleSidebar()" class="md:hidden text-gray-500 hover:text-gray-800 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -118,6 +108,10 @@
             <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 Dashboard
+            </button>
+            <button onclick="switchTab('kalender')" id="nav-kalender" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
+                <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Kalender Kamar
             </button>
             <button onclick="switchTab('reservasi')" id="nav-reservasi" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -134,10 +128,9 @@
         </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-1 overflow-y-auto bg-gray-50 relative">
         
-        <!-- SECTION: DASHBOARD -->
+        <!-- DASHBOARD -->
         <section id="sec-dashboard" class="p-4 md:p-8">
             <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Dashboard Overview</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -151,12 +144,38 @@
                     <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4">
                         <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
-                    <div><p class="text-sm text-gray-500 font-medium">Total Seluruh Data (Database)</p><p id="dash-total" class="text-2xl font-bold text-gray-800">0</p></div>
+                    <div><p class="text-sm text-gray-500 font-medium">Total Seluruh Data</p><p id="dash-total" class="text-2xl font-bold text-gray-800">0</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: RESERVASI -->
+        <!-- KALENDER KAMAR -->
+        <section id="sec-kalender" class="p-4 md:p-8 hidden">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800">Ketersediaan Kamar</h2>
+                <div class="flex items-center gap-2">
+                    <label class="text-sm font-bold text-gray-600">Mulai Tanggal:</label>
+                    <input type="date" id="kalender-date" onchange="renderKalender()" class="p-2 border border-gray-300 rounded-lg text-sm focus:ring-[#5F4180] outline-none">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto relative w-full">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead id="kalender-head" class="bg-gray-50 border-b border-gray-200">
+                        </thead>
+                        <tbody id="kalender-body" class="divide-y divide-gray-100">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50 flex gap-4 text-xs font-medium text-gray-600">
+                    <span class="flex items-center"><div class="w-3 h-3 bg-yellow-100 border border-yellow-200 rounded-sm mr-2"></div> Booking / Reservasi</span>
+                    <span class="flex items-center"><div class="w-3 h-3 bg-green-100 border border-green-200 rounded-sm mr-2"></div> Check-In</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESERVASI -->
         <section id="sec-reservasi" class="p-4 md:p-8 hidden">
             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="bg-[#5F4180] px-6 py-4">
@@ -178,7 +197,7 @@
                         <div class="flex flex-col">
                             <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor Kamar <span class="text-red-500">*</span></label>
                             <select id="r_noKamar" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
-                                <option value="">-- Memuat Kamar dari Database... --</option>
+                                <option value="">-- Memuat Kamar --</option>
                             </select>
                         </div>
 
@@ -217,11 +236,11 @@
             </div>
         </section>
 
-        <!-- SECTION: REGISTRASI -->
+        <!-- REGISTRASI -->
         <section id="sec-registrasi" class="p-4 md:p-8 hidden">
             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="bg-[#5F4180] px-6 py-4">
-                    <h2 class="text-lg font-bold text-white">Formulir Registrasi Tamu</h2>
+                    <h2 class="text-lg font-bold text-white">Formulir Registrasi Tamu (Check-In)</h2>
                 </div>
                 <div class="p-4 md:p-8">
                     <form id="regForm" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="simpanRegistrasi(event)">
@@ -231,7 +250,6 @@
                             <select id="i_noKamar" onchange="updateRoomDetails()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] focus:border-[#5F4180] outline-none transition-all" required>
                                 <option value="">-- Memuat Kamar dari Database... --</option>
                             </select>
-                            <span id="loadMsg" class="text-xs text-[#5F4180] mt-1 hidden font-semibold">Sedang sinkronisasi data dari Google Sheets...</span>
                         </div>
 
                         <div class="flex flex-col">
@@ -289,7 +307,7 @@
             </div>
         </section>
 
-        <!-- SECTION: RIWAYAT -->
+        <!-- RIWAYAT -->
         <section id="sec-riwayat" class="p-4 md:p-8 hidden">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-800 flex items-center">
@@ -339,11 +357,9 @@
                             </tr>
                         </thead>
                         <tbody id="history-body" class="divide-y divide-gray-100">
-                            <!-- Data will be injected here via JS -->
                         </tbody>
                     </table>
                 </div>
-                <!-- Empty State -->
                 <div id="history-empty" class="hidden p-8 text-center text-gray-500">
                     <p>Sedang memuat data dari Database Cloud...</p>
                 </div>
@@ -351,19 +367,18 @@
         </section>
     </main>
 
-    <!-- MODAL SUCCESS (POP-UP) -->
+    <!-- MODALS -->
     <div id="modal-success" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-all">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Berhasil!</h3>
-            <p class="text-gray-500 text-sm mb-6">Data telah berhasil disimpan ke dalam database sistem.</p>
+            <p class="text-gray-500 text-sm mb-6">Data telah berhasil disimpan ke dalam database.</p>
             <button onclick="closeModal()" class="w-full bg-[#5F4180] text-white font-bold py-3 rounded-lg hover:bg-[#4a3266] transition-colors">Tutup</button>
         </div>
     </div>
 
-    <!-- MODAL CONFIRM DELETE -->
     <div id="modal-delete" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-all">
             <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -378,14 +393,10 @@
         </div>
     </div>
 
-    <!-- ========================================================
-         AREA CETAK (PRINT TEMPLATE) - PERSIS GAMBAR
-         ======================================================== -->
+    <!-- AREA CETAK FISIK -->
     <div class="print-area">
-        
         <div class="print-brand" style="margin-bottom: 20px; justify-content: space-between;">
             <div style="display: flex; gap: 10px; align-items: center;">
-                <!-- LOGO HOTEL LAVENDER -->
                 <img src="./logo-hotel.png" alt="Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-[#5F4180]');">
                 <div>
                     <h1>HOTEL LAVENDER</h1>
@@ -500,7 +511,6 @@
                         </ul>
                     </div>
                 </td>
-                <!-- TANDA TANGAN DIBAGI 2 BARIS DENGAN ICON CUSTOM -->
                 <td width="20%" style="padding: 0; vertical-align: top;">
                     <table style="width: 100%; height: 100%; border-collapse: collapse; border: none;">
                         <tr>
@@ -512,7 +522,7 @@
                             <td style="border: none; border-top: 1px solid #000; padding: 8px; text-align: center; vertical-align: middle; background-color: #fafafa;">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; justify-items: center; align-items: center;">
                                     <img src="./no-pet.png" class="icon-prohibit" alt="No Pets" onerror="this.style.display='none'">
-                                    <img src="./no-drinks.png" class="icon-prohibit" alt="No Drinks" onerror="this.style.display='none'">
+                                    <img src="./no-drinks.png" class="icon-prohibit" alt="No Alcohol" onerror="this.style.display='none'">
                                     <img src="./durian.png" class="icon-prohibit" alt="No Durian" onerror="this.style.display='none'">
                                     <img src="./bed.png" class="icon-prohibit" alt="No Bed" onerror="this.style.display='none'">
                                 </div>
@@ -544,7 +554,6 @@
     </div>
 
     <script>
-        // LINK API GOOGLE APPS SCRIPT
         const API_URL = "https://script.google.com/macros/s/AKfycbwx7kCj1HdFOIuGNNHei5z2i3WSDI9mR-tkf1m_yN1zoFtL4EtiiSqA-52hvghyHrex9Q/exec"; 
 
         let dbRiwayat = []; 
@@ -563,11 +572,14 @@
         window.onload = async () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('i_ci').value = today;
-            document.getElementById('r_ci').value = today; // Untuk form reservasi
+            document.getElementById('r_ci').value = today; 
+            if (document.getElementById('kalender-date')) {
+                document.getElementById('kalender-date').value = today;
+            }
 
             const loadMsg = document.getElementById('loadMsg');
             const selectKamar = document.getElementById("i_noKamar");
-            const selectKamarRes = document.getElementById("r_noKamar"); // Dropdown reservasi
+            const selectKamarRes = document.getElementById("r_noKamar"); 
             
             try {
                 if(loadMsg) loadMsg.classList.remove('hidden');
@@ -595,7 +607,7 @@
         async function fetchHistory() {
             const emptyState = document.getElementById('history-empty');
             if(emptyState) {
-                emptyState.innerHTML = '<p>Sedang mensinkronisasi data dari Database Google Sheets...</p>';
+                emptyState.innerHTML = '<p>Sedang mensinkronisasi data dari Database Cloud...</p>';
                 emptyState.classList.remove('hidden');
             }
             try {
@@ -605,6 +617,7 @@
                     dbRiwayat = data;
                     renderHistory();
                     updateDashboard();
+                    renderKalender();
                 } else {
                     if(emptyState) emptyState.innerHTML = '<p>Belum ada data.</p>';
                 }
@@ -613,6 +626,7 @@
                 dbRiwayat = JSON.parse(localStorage.getItem('lavender_history')) || [];
                 renderHistory();
                 updateDashboard();
+                renderKalender();
             }
         }
 
@@ -630,6 +644,7 @@
 
         function switchTab(tabId) {
             document.getElementById('sec-dashboard').classList.add('hidden');
+            document.getElementById('sec-kalender').classList.add('hidden');
             document.getElementById('sec-reservasi').classList.add('hidden');
             document.getElementById('sec-registrasi').classList.add('hidden');
             document.getElementById('sec-riwayat').classList.add('hidden');
@@ -641,6 +656,7 @@
 
             if(tabId === 'riwayat') renderHistory();
             if(tabId === 'dashboard') updateDashboard();
+            if(tabId === 'kalender') renderKalender();
             
             const sidebar = document.getElementById('sidebar');
             if(!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
@@ -648,7 +664,75 @@
             }
         }
 
-        // FUNGSI SIMPAN REGISTRASI (CHECK-IN)
+        function renderKalender() {
+            const tbody = document.getElementById('kalender-body');
+            const thead = document.getElementById('kalender-head');
+            if(!tbody || !thead) return;
+
+            let startDateStr = document.getElementById('kalender-date').value;
+            if(!startDateStr) {
+                startDateStr = new Date().toISOString().split('T')[0];
+                document.getElementById('kalender-date').value = startDateStr;
+            }
+            const startDate = new Date(startDateStr);
+            startDate.setHours(0,0,0,0);
+
+            let headHtml = '<th class="p-3 text-xs font-bold text-gray-500 uppercase sticky left-0 bg-gray-100 z-20 w-32 border-r border-gray-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">Kamar</th>';
+            const dateArray = [];
+            const namaHari = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+            
+            for(let i=0; i<14; i++) {
+                let d = new Date(startDate);
+                d.setDate(d.getDate() + i);
+                dateArray.push(d);
+                const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                const bgHeader = isWeekend ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600';
+                const dateStr = d.getDate() + '/' + (d.getMonth()+1);
+                const dayStr = namaHari[d.getDay()];
+                headHtml += `<th class="p-2 text-xs font-bold text-center min-w-[70px] border-l border-gray-200 ${bgHeader}">${dayStr}<br><span class="text-[10px] font-normal">${dateStr}</span></th>`;
+            }
+            thead.innerHTML = `<tr>${headHtml}</tr>`;
+
+            let bodyHtml = '';
+            if(roomMasterData.length === 0) {
+                bodyHtml = '<tr><td colspan="15" class="p-4 text-center text-gray-500">Memuat data...</td></tr>';
+            } else {
+                roomMasterData.forEach(room => {
+                    const roomNo = room[0];
+                    let rowHtml = `<td class="p-3 text-sm font-bold text-[#5F4180] sticky left-0 bg-white z-10 border-r border-gray-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]">${roomNo} <span class="block text-[10px] text-gray-500 font-normal">${room[1]}</span></td>`;
+
+                    dateArray.forEach(date => {
+                        const dateTime = date.getTime();
+                        
+                        const booking = dbRiwayat.find(b => {
+                            if(b.noKamar != roomNo) return false;
+                            if(!b.ci || !b.co) return false;
+                            const ciDate = new Date(b.ci).setHours(0,0,0,0);
+                            const coDate = new Date(b.co).setHours(0,0,0,0);
+                            return dateTime >= ciDate && dateTime < coDate;
+                        });
+
+                        if(booking) {
+                            const isRes = booking.jenis_form === 'reservasi';
+                            const bgColor = isRes ? 'bg-yellow-100 hover:bg-yellow-200' : 'bg-green-100 hover:bg-green-200';
+                            const textColor = isRes ? 'text-yellow-800' : 'text-green-800';
+                            const label = isRes ? 'Booking' : 'In';
+                            
+                            rowHtml += `<td class="p-1 border-l border-gray-200 bg-gray-50">
+                                <div class="${bgColor} ${textColor} text-[10px] font-bold py-1 px-0.5 rounded text-center truncate cursor-pointer transition-colors" title="${booking.nama} | HP: ${booking.hp} | CI: ${formatTgl(booking.ci)} - CO: ${formatTgl(booking.co)}">
+                                    ${label}
+                                </div>
+                            </td>`;
+                        } else {
+                            rowHtml += `<td class="p-2 border-l border-gray-200"></td>`;
+                        }
+                    });
+                    bodyHtml += `<tr class="border-b border-gray-100 hover:bg-gray-50">${rowHtml}</tr>`;
+                });
+            }
+            tbody.innerHTML = bodyHtml;
+        }
+
         async function simpanRegistrasi(event) {
             event.preventDefault(); 
 
@@ -663,7 +747,7 @@
             const jamMasuk = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
 
             const payload = {
-                jenis_form: 'registrasi', // Tanda bahwa ini form Check-In
+                jenis_form: 'registrasi',
                 id: Date.now().toString(),
                 ts: timestampData,
                 tglBuat: tglBuatStr,
@@ -702,6 +786,7 @@
                 
                 updateDashboard();
                 if(!document.getElementById('sec-riwayat').classList.contains('hidden')) renderHistory();
+                if(!document.getElementById('sec-kalender').classList.contains('hidden')) renderKalender();
             } catch (error) {
                 console.error(error);
                 alert("Penyimpanan terhambat jaringan. Data diamankan lokal.");
@@ -714,7 +799,6 @@
             }
         }
 
-        // FUNGSI BARU: SIMPAN RESERVASI
         async function simpanReservasi(event) {
             event.preventDefault(); 
 
@@ -729,7 +813,7 @@
             const jamMasuk = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
 
             const payload = {
-                jenis_form: 'reservasi', // Tanda bahwa ini form Booking
+                jenis_form: 'reservasi',
                 id: Date.now().toString(),
                 ts: timestampData,
                 tglBuat: tglBuatStr,
@@ -761,6 +845,7 @@
                 
                 updateDashboard();
                 if(!document.getElementById('sec-riwayat').classList.contains('hidden')) renderHistory();
+                if(!document.getElementById('sec-kalender').classList.contains('hidden')) renderKalender();
             } catch (error) {
                 console.error(error);
                 alert("Penyimpanan terhambat jaringan. Data diamankan lokal.");
@@ -808,7 +893,6 @@
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-gray-50';
                     
-                    // Membuat Badge Pembeda antara Reservasi dan Check-in
                     const badge = data.jenis_form === 'reservasi' 
                                   ? '<span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-[10px] font-bold rounded-full ml-2">Booking</span>' 
                                   : '<span class="px-2 py-1 bg-green-100 text-green-800 text-[10px] font-bold rounded-full ml-2">Check-in</span>';
@@ -829,7 +913,6 @@
             }
         }
 
-        // FUNGSI CETAK
         function cetakDariRiwayat(id) {
             const data = dbRiwayat.find(d => d.id === id);
             if(!data) return;
