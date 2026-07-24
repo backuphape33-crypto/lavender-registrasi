@@ -88,7 +88,6 @@
     <!-- MOBILE TOP HEADER (HANYA TAMPIL DI HP) -->
     <div class="md:hidden flex items-center justify-between bg-[#5F4180] text-white p-4 z-20 shadow-md">
         <div class="flex items-center font-bold text-lg">
-            <!-- LOGO HOTEL LAVENDER -->
             <img src="./logo-hotel.png" alt="Logo" class="w-8 h-8 rounded mr-3 object-contain" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-white','text-[#5F4180]');">
             Hotel Lavender
         </div>
@@ -104,7 +103,6 @@
     <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out z-30">
         <div class="h-20 flex items-center justify-between px-6 border-b border-gray-100">
             <div class="flex items-center">
-                <!-- LOGO HOTEL LAVENDER -->
                 <img src="./logo-hotel.png" alt="Logo" class="w-8 h-8 rounded mr-3 object-contain" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' viewBox=\'0 0 24 24\'><text x=\'7\' y=\'17\' font-size=\'16\' font-family=\'Arial\'>L</text></svg>'; this.classList.add('bg-[#5F4180]');">
                 <div>
                     <h1 class="font-bold text-[#5F4180] text-lg leading-tight">Hotel Lavender</h1>
@@ -120,6 +118,10 @@
             <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 Dashboard
+            </button>
+            <button onclick="switchTab('reservasi')" id="nav-reservasi" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
+                <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Menu Reservasi
             </button>
             <button onclick="switchTab('registrasi')" id="nav-registrasi" class="nav-item w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600">
                 <svg class="w-5 h-5 mr-3 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -150,6 +152,67 @@
                         <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
                     <div><p class="text-sm text-gray-500 font-medium">Total Seluruh Data (Database)</p><p id="dash-total" class="text-2xl font-bold text-gray-800">0</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: RESERVASI -->
+        <section id="sec-reservasi" class="p-4 md:p-8 hidden">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-[#5F4180] px-6 py-4">
+                    <h2 class="text-lg font-bold text-white">Formulir Reservasi (Booking Kamar)</h2>
+                </div>
+                <div class="p-4 md:p-8">
+                    <form id="resForm" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="simpanReservasi(event)">
+                        
+                        <div class="flex flex-col md:col-span-2">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nama Pemesan <span class="text-red-500">*</span></label>
+                            <input type="text" id="r_nama" placeholder="Nama Lengkap" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor HP / WA <span class="text-red-500">*</span></label>
+                            <input type="text" id="r_hp" placeholder="Contoh: 0812..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Nomor Kamar <span class="text-red-500">*</span></label>
+                            <select id="r_noKamar" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
+                                <option value="">-- Memuat Kamar dari Database... --</option>
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Rencana Check-In <span class="text-red-500">*</span></label>
+                            <input type="date" id="r_ci" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Rencana Check-Out <span class="text-red-500">*</span></label>
+                            <input type="date" id="r_co" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none" required>
+                        </div>
+                        
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Deposit / DP (Rp)</label>
+                            <input type="number" id="r_dp" placeholder="Isi 0 jika tidak ada" value="0" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none">
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Asal Reservasi</label>
+                            <input type="text" id="r_perusahaan" placeholder="Contoh: Traveloka, WA" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none">
+                        </div>
+
+                        <div class="flex flex-col md:col-span-2">
+                            <label class="text-xs font-bold text-gray-600 uppercase mb-2">Keterangan Tambahan</label>
+                            <textarea id="r_keterangan" rows="2" placeholder="Catatan khusus..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F4180] outline-none"></textarea>
+                        </div>
+
+                        <div class="md:col-span-2 mt-4 pt-4 border-t border-gray-200">
+                            <button type="submit" id="btn-submit-res" class="w-full bg-[#5F4180] hover:bg-[#4a3266] text-white font-bold py-4 rounded-lg shadow-md transition-colors text-lg">
+                                Simpan Data Reservasi
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -230,7 +293,7 @@
         <section id="sec-riwayat" class="p-4 md:p-8 hidden">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-800 flex items-center">
-                    Riwayat Registrasi
+                    Riwayat Data
                     <button onclick="fetchHistory()" title="Refresh Data Cloud" class="ml-4 text-[#5F4180] hover:bg-purple-100 p-2 rounded-full transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     </button>
@@ -295,7 +358,7 @@
                 <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Berhasil!</h3>
-            <p class="text-gray-500 text-sm mb-6">Data registrasi tamu telah berhasil disimpan ke dalam database sistem.</p>
+            <p class="text-gray-500 text-sm mb-6">Data telah berhasil disimpan ke dalam database sistem.</p>
             <button onclick="closeModal()" class="w-full bg-[#5F4180] text-white font-bold py-3 rounded-lg hover:bg-[#4a3266] transition-colors">Tutup</button>
         </div>
     </div>
@@ -437,7 +500,7 @@
                         </ul>
                     </div>
                 </td>
-                <!-- TANDA TANGAN DIBAGI 2 BARIS DENGAN ICON -->
+                <!-- TANDA TANGAN DIBAGI 2 BARIS DENGAN ICON CUSTOM -->
                 <td width="20%" style="padding: 0; vertical-align: top;">
                     <table style="width: 100%; height: 100%; border-collapse: collapse; border: none;">
                         <tr>
@@ -449,7 +512,7 @@
                             <td style="border: none; border-top: 1px solid #000; padding: 8px; text-align: center; vertical-align: middle; background-color: #fafafa;">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; justify-items: center; align-items: center;">
                                     <img src="./no-pet.png" class="icon-prohibit" alt="No Pets" onerror="this.style.display='none'">
-                                    <img src="./no-drinks.png" class="icon-prohibit" alt="No Alcohol" onerror="this.style.display='none'">
+                                    <img src="./no-drinks.png" class="icon-prohibit" alt="No Drinks" onerror="this.style.display='none'">
                                     <img src="./durian.png" class="icon-prohibit" alt="No Durian" onerror="this.style.display='none'">
                                     <img src="./bed.png" class="icon-prohibit" alt="No Bed" onerror="this.style.display='none'">
                                 </div>
@@ -481,7 +544,7 @@
     </div>
 
     <script>
-        // LINK API GOOGLE APPS SCRIPT BARU
+        // LINK API GOOGLE APPS SCRIPT
         const API_URL = "https://script.google.com/macros/s/AKfycbwx7kCj1HdFOIuGNNHei5z2i3WSDI9mR-tkf1m_yN1zoFtL4EtiiSqA-52hvghyHrex9Q/exec"; 
 
         let dbRiwayat = []; 
@@ -500,23 +563,26 @@
         window.onload = async () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('i_ci').value = today;
+            document.getElementById('r_ci').value = today; // Untuk form reservasi
 
             const loadMsg = document.getElementById('loadMsg');
             const selectKamar = document.getElementById("i_noKamar");
+            const selectKamarRes = document.getElementById("r_noKamar"); // Dropdown reservasi
             
             try {
                 if(loadMsg) loadMsg.classList.remove('hidden');
                 
-                // MENGGUNAKAN GET UNTUK MENGAMBIL DATA KAMAR
                 const res = await fetch(`${API_URL}?action=getRooms`);
                 roomMasterData = await res.json();
                 
                 selectKamar.innerHTML = '<option value="">-- Pilih Kamar --</option>';
+                if(selectKamarRes) selectKamarRes.innerHTML = '<option value="">-- Pilih Kamar --</option>';
+
                 roomMasterData.forEach(r => {
                     selectKamar.innerHTML += `<option value="${r[0]}">${r[0]}</option>`;
+                    if(selectKamarRes) selectKamarRes.innerHTML += `<option value="${r[0]}">${r[0]} (${r[1]})</option>`;
                 });
 
-                // SETELAH KAMAR, AMBIL RIWAYAT DARI DATABASE GOOGLE SHEETS
                 fetchHistory();
             } catch(e) {
                 console.error("Gagal load data API:", e);
@@ -526,7 +592,6 @@
             }
         };
 
-        // FUNGSI TARIK DATA RIWAYAT DARI CLOUD GOOGLE SHEETS
         async function fetchHistory() {
             const emptyState = document.getElementById('history-empty');
             if(emptyState) {
@@ -541,11 +606,10 @@
                     renderHistory();
                     updateDashboard();
                 } else {
-                    if(emptyState) emptyState.innerHTML = '<p>Belum ada data registrasi.</p>';
+                    if(emptyState) emptyState.innerHTML = '<p>Belum ada data.</p>';
                 }
             } catch (e) {
                 console.error("Gagal menarik history:", e);
-                // JIKA GAGAL INTERNET, FALLBACK KE LOKAL
                 dbRiwayat = JSON.parse(localStorage.getItem('lavender_history')) || [];
                 renderHistory();
                 updateDashboard();
@@ -566,6 +630,7 @@
 
         function switchTab(tabId) {
             document.getElementById('sec-dashboard').classList.add('hidden');
+            document.getElementById('sec-reservasi').classList.add('hidden');
             document.getElementById('sec-registrasi').classList.add('hidden');
             document.getElementById('sec-riwayat').classList.add('hidden');
             
@@ -583,6 +648,7 @@
             }
         }
 
+        // FUNGSI SIMPAN REGISTRASI (CHECK-IN)
         async function simpanRegistrasi(event) {
             event.preventDefault(); 
 
@@ -597,6 +663,7 @@
             const jamMasuk = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
 
             const payload = {
+                jenis_form: 'registrasi', // Tanda bahwa ini form Check-In
                 id: Date.now().toString(),
                 ts: timestampData,
                 tglBuat: tglBuatStr,
@@ -619,20 +686,14 @@
             };
 
             try {
-                // KIRIM POST KE GOOGLE SHEETS
-                // Menggunakan fetch POST dengan form-urlencoded atau text/plain menghindari blokir preflight CORS
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    body: JSON.stringify(payload)
-                });
-                
-                if (!response.ok) {
-                   console.warn("Response API tidak OK, tapi akan tetap dilanjutkan ke lokal.");
+                if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
+                    await fetch(API_URL, {
+                        method: "POST",
+                        body: JSON.stringify(payload)
+                    });
                 }
-
-                // Tambahkan langsung ke UI sementara
+                
                 dbRiwayat.unshift(payload);
-                // Backup ke lokal jika internet bermasalah di kemudian hari
                 localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
 
                 document.getElementById('regForm').reset();
@@ -641,11 +702,68 @@
                 
                 updateDashboard();
                 if(!document.getElementById('sec-riwayat').classList.contains('hidden')) renderHistory();
-
             } catch (error) {
                 console.error(error);
-                alert("Proses penyimpanan database terhambat jaringan. Data diamankan ke memori lokal.");
-                // Tetap simpan ke lokal
+                alert("Penyimpanan terhambat jaringan. Data diamankan lokal.");
+                dbRiwayat.unshift(payload);
+                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
+                document.getElementById('modal-success').classList.remove('hidden');
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // FUNGSI BARU: SIMPAN RESERVASI
+        async function simpanReservasi(event) {
+            event.preventDefault(); 
+
+            const btn = document.getElementById('btn-submit-res');
+            const originalText = btn.innerText;
+            btn.innerText = "Menyimpan Reservasi...";
+            btn.disabled = true;
+
+            const now = new Date();
+            const timestampData = now.toISOString(); 
+            const tglBuatStr = String(now.getDate()).padStart(2, '0') + "/" + String(now.getMonth()+1).padStart(2, '0') + "/" + now.getFullYear();
+            const jamMasuk = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
+
+            const payload = {
+                jenis_form: 'reservasi', // Tanda bahwa ini form Booking
+                id: Date.now().toString(),
+                ts: timestampData,
+                tglBuat: tglBuatStr,
+                jam: jamMasuk,
+                nama: document.getElementById('r_nama').value,
+                hp: document.getElementById('r_hp').value,
+                noKamar: document.getElementById('r_noKamar').value,
+                ci: document.getElementById('r_ci').value,
+                co: document.getElementById('r_co').value,
+                dp: document.getElementById('r_dp').value,
+                perusahaan: document.getElementById('r_perusahaan').value,
+                keterangan: document.getElementById('r_keterangan').value
+            };
+
+            try {
+                if(API_URL !== "URL_API_GAS_ANDA_DISINI" && API_URL !== "") {
+                    await fetch(API_URL, {
+                        method: "POST",
+                        body: JSON.stringify(payload)
+                    });
+                }
+                
+                dbRiwayat.unshift(payload);
+                localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
+
+                document.getElementById('resForm').reset();
+                document.getElementById('r_ci').value = new Date().toISOString().split('T')[0];
+                document.getElementById('modal-success').classList.remove('hidden');
+                
+                updateDashboard();
+                if(!document.getElementById('sec-riwayat').classList.contains('hidden')) renderHistory();
+            } catch (error) {
+                console.error(error);
+                alert("Penyimpanan terhambat jaringan. Data diamankan lokal.");
                 dbRiwayat.unshift(payload);
                 localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
                 document.getElementById('modal-success').classList.remove('hidden');
@@ -689,10 +807,16 @@
                 dataToShow.forEach(data => {
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-gray-50';
+                    
+                    // Membuat Badge Pembeda antara Reservasi dan Check-in
+                    const badge = data.jenis_form === 'reservasi' 
+                                  ? '<span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-[10px] font-bold rounded-full ml-2">Booking</span>' 
+                                  : '<span class="px-2 py-1 bg-green-100 text-green-800 text-[10px] font-bold rounded-full ml-2">Check-in</span>';
+
                     tr.innerHTML = `
                         <td class="p-4 text-center"><input type="checkbox" class="cb-item w-4 h-4 rounded text-[#5F4180]" value="${data.id}"></td>
                         <td class="p-4 text-sm text-gray-800">${data.tglBuat} ${data.jam}</td>
-                        <td class="p-4 text-sm font-semibold text-[#5F4180]">${data.nama}</td>
+                        <td class="p-4 text-sm font-semibold text-[#5F4180] flex items-center">${data.nama} ${badge}</td>
                         <td class="p-4 text-sm text-gray-800 font-medium">${data.noKamar}</td>
                         <td class="p-4 text-xs text-gray-500">${formatTgl(data.ci)} <br> ${formatTgl(data.co)}</td>
                         <td class="p-4 text-center space-x-2 flex justify-center">
@@ -705,26 +829,31 @@
             }
         }
 
-        // PERBAIKAN FITUR CETAK AGAR BERFUNGSI MAKSIMAL DI HP
+        // FUNGSI CETAK
         function cetakDariRiwayat(id) {
             const data = dbRiwayat.find(d => d.id === id);
             if(!data) return;
 
-            document.getElementById('p_folio').innerText = data.folio;
-            document.getElementById('p_jamMasuk').innerText = data.jam;
+            if (data.jenis_form === 'reservasi') {
+                alert("Data ini adalah status Reservasi (Booking). Anda hanya bisa mencetak form Registrasi (Check-in).");
+                return;
+            }
+
+            document.getElementById('p_folio').innerText = data.folio || "";
+            document.getElementById('p_jamMasuk').innerText = data.jam || "";
             const tsFormat = `${data.tglBuat} ${data.jam}:00`;
             document.getElementById('p_timestampKananAtas').innerText = tsFormat;
-            document.getElementById('p_noKamar').innerText = data.noKamar;
-            document.getElementById('p_tipeKamar').innerText = data.tipeKamar;
-            document.getElementById('p_harga').innerText = data.harga;
-            document.getElementById('p_resepsionis').innerText = data.resepsionis;
-            document.getElementById('p_jumlahTamu').innerText = data.tamu;
-            document.getElementById('p_nama').innerText = data.nama;
-            document.getElementById('p_perusahaan').innerText = data.perusahaan;
-            document.getElementById('p_ktp').innerText = data.ktp;
-            document.getElementById('p_alamat').innerText = data.alamat;
+            document.getElementById('p_noKamar').innerText = data.noKamar || "";
+            document.getElementById('p_tipeKamar').innerText = data.tipeKamar || "";
+            document.getElementById('p_harga').innerText = data.harga || "";
+            document.getElementById('p_resepsionis').innerText = data.resepsionis || "";
+            document.getElementById('p_jumlahTamu').innerText = data.tamu || "";
+            document.getElementById('p_nama').innerText = data.nama || "";
+            document.getElementById('p_perusahaan').innerText = data.perusahaan || "";
+            document.getElementById('p_ktp').innerText = data.ktp || "";
+            document.getElementById('p_alamat').innerText = data.alamat || "";
             document.getElementById('p_email').innerText = data.email || "";
-            document.getElementById('p_hp').innerText = data.hp;
+            document.getElementById('p_hp').innerText = data.hp || "";
             document.getElementById('p_tglLahir').innerText = formatTgl(data.tglLahir);
             document.getElementById('p_ci').innerText = formatTgl(data.ci);
             document.getElementById('p_co').innerText = formatTgl(data.co);
@@ -747,7 +876,6 @@
                     dbRiwayat = dbRiwayat.filter(d => d.id !== tempDeleteId);
                 }
                 
-                // CATATAN: Fungsi hapus ini hanya menghapus dari layar web sementara dan local storage
                 localStorage.setItem('lavender_history', JSON.stringify(dbRiwayat));
                 closeDeleteModal();
                 renderHistory();
